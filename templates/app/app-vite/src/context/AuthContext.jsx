@@ -29,25 +29,16 @@ export function AuthProvider({ children }) {
   }
 
   async function register(email, password) {
-    const response = await fetch(api("/register"), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Registration failed. The email may already be in use.");
-    }
-
-    const { accessToken, user } = await response.json();
-    persist(accessToken, user);
+    // TODO: POST to api("/register") with { email, password }
+    // TODO: if the response is not ok, throw an error
+    // TODO: destructure { accessToken, user } from the response JSON
+    // TODO: call `persist` with accessToken and user to save the session
   }
 
   function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setToken(null);
-    setUser(null);
+    // TODO add the missing logout logic here — clear the token and user from state as well
   }
 
   function persist(accessToken, user) {
