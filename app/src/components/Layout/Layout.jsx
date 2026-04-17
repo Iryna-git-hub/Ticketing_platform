@@ -8,7 +8,7 @@ export default function Layout() {
   return (
     <div className="app-shell">
       <header>
-        <nav className="site-nav">
+        <nav className="site-nav content-width">
           <div className="site-nav-left">
             <a href="/" className="link">
               <img
@@ -41,7 +41,7 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <footer className="site-footer">
+      <footer className="site-footer content-width">
         &copy;GoEvent
       </footer>
     </div>

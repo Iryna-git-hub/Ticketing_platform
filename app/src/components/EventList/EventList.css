@@ -1,6 +1,92 @@
 .events-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
   list-style: none;
+  padding: 24px;
+}
+
+.event-card {
+  display: flex;
+  min-height: 300px;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+}
+
+.event-card:hover {
+  border-color: var(--primary-color);
+}
+
+.event-title {
+  color: var(--secondary-color);
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.ticket-divider {
+  margin-inline: -20px;
+}
+
+.event-details {
+  display: grid;
+  gap: 9px;
+  font-size: 0.88rem;
+}
+
+.event-details p,
+.event-price-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.event-details span {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.event-card-bottom {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.event-price-row span {
+  color: var(--secondary-color);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.event-availability {
+  font-size: 0.86rem;
+}
+
+.event-card-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.event-card-link {
+  display: flex;
+  justify-content: center;
+  border: 1px solid var(--secondary-color);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 11px 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.event-card-link:focus-visible {
+  outline: 3px solid #ffd2dc;
+  outline-offset: 3px;
+}
+
+@media (min-width: 421px) {
+  .event-card-actions {
+    grid-template-columns: 1fr 1fr;
+  }
 }

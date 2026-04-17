@@ -1,24 +1,62 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
+import {
+  CalendarIcon,
+  ClockIcon,
+  MapPinIcon,
+  TicketIcon,
+} from "../EventIcons/EventIcons.jsx";
 
 export default function EventCard({ event }) {
   return (
-    <li>
-      <h2>{event.name}</h2>
-      <p>
-        <span className="">date:</span> {event.date} at {event.time}
-      </p>
-      <p>
-        address:{event.venue}, {event.city}
-      </p>
-      <p>event type: {event.category}</p>
-      <p>{event.price === 0 ? "Free" : `€${event.price}`}</p>
-      <p>
-        {event.ticketsAvailable === 0
-          ? "Sold out"
-          : `${event.ticketsAvailable} tickets left`}
-      </p>
-      <Link to={`/events/${event.id}`}>Buy ticket</Link>
+    <li className="event-card panel-card">
+      <div className="event-card-top">
+        <span className="category-badge">{event.category}</span>
+      </div>
 
+      <h2 className="event-title">{event.name}</h2>
+      <div className="ticket-divider" aria-hidden="true" />
+
+      <div className="event-details">
+        <p>
+          <CalendarIcon />
+          <span>{event.date}</span>
+        </p>
+        <p>
+          <ClockIcon />
+          <span>{event.time}</span>
+        </p>
+        <p>
+          <MapPinIcon />
+          <span>{event.venue}, {event.city}</span>
+        </p>
+      </div>
+
+      <div className="event-card-bottom">
+        <div className="ticket-divider" aria-hidden="true" />
+        <p className="event-price-row">
+          <TicketIcon />
+          <span>{event.price === 0 ? "Free" : `${event.price} DKK`}</span>
+        </p>
+
+        <p
+          className={`event-availability availability ${
+            event.ticketsAvailable === 0 ? "availability-sold-out" : ""
+          }`}
+        >
+          {event.ticketsAvailable === 0
+            ? "Sold out"
+            : `${event.ticketsAvailable} tickets left`}
+        </p>
+
+        <div className="event-card-actions">
+          <Link className="event-card-link primary-button" to={`/events/${event.id}`}>
+            Get tickets
+          </Link>
+          <Link className="event-card-link secondary-button" to={`/events/${event.id}`}>
+            View details
+          </Link>
+        </div>
+      </div>
     </li>
   );
 }

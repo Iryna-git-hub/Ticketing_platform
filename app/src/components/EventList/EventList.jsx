@@ -9,7 +9,7 @@ import "./EventList.css";
 
 export default function EventList() {
   return (
-    <ul className="events-list">
+    <ul className="events-list content-width">
       {events.map((event) => (
         <EventCard key={event.id} event={event} />
       ))}
