@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import hyfLogo from "../../assets/hyf.svg";
+import GoEventLogo from "../../assets/GoEvent_logo.png";
 import { useAuth } from "../../context/AuthContext.jsx";
 
 export default function Layout() {
@@ -19,15 +19,14 @@ export default function Layout() {
           }}
         >
           <a
-            href="https://www.hackyourfuture.dk/"
-            target="_blank"
+            href="/"
             className="link"
           >
             <img
-              src={hyfLogo}
-              alt="HackYourFuture logo"
+              src={GoEventLogo}
+              alt="GoEvent logo"
               className="logo"
-              width={200}
+              width={130}
               style={{ padding: "20px" }}
             />
           </a>

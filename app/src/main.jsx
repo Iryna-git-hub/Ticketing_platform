@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout/Layout.jsx";
 import HomePage from "./components/HomePage/HomePage.jsx";
 import EventList from "./components/EventList/EventList.jsx";
+import EventDetail from "./components/EventDetail/EventDetail.jsx";
 import Login from "./components/Login/Login.jsx";
 import Register from "./components/Register/Register.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
@@ -19,6 +20,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "events", element: <EventList /> },
+      { path: "events/:id", element: <EventDetail /> },
+
     ],
   },
   { path: "/login", element: <Login /> },
