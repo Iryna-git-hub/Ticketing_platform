@@ -1,5 +1,6 @@
 import EventCard from "../EventCard/EventCard.jsx";
 import events from "../../data/events.js";
+import "./EventList.css";
 
 
 // TODO: replace the mock data import with a fetch call to GET /events
@@ -8,7 +9,7 @@ import events from "../../data/events.js";
 
 export default function EventList() {
   return (
-    <ul>
+    <ul className="events-list">
       {events.map((event) => (
         <EventCard key={event.id} event={event} />
       ))}

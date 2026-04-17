@@ -5,12 +5,12 @@ export default function EventCard({ event }) {
     <li>
       <h2>{event.name}</h2>
       <p>
-        {event.date} at {event.time}
+        <span className="">date:</span> {event.date} at {event.time}
       </p>
       <p>
-        {event.venue}, {event.city}
+        address:{event.venue}, {event.city}
       </p>
-      <p>{event.category}</p>
+      <p>event type: {event.category}</p>
       <p>{event.price === 0 ? "Free" : `€${event.price}`}</p>
       <p>
         {event.ticketsAvailable === 0

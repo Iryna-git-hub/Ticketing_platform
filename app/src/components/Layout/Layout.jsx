@@ -12,38 +12,53 @@ export default function Layout() {
           style={{
             width: "100%",
             display: "flex",
-            gap: "20px",
-            justifyContent: "center",
+            justifyContent: "space-between",
             alignItems: "center",
             padding: "10px 20px",
           }}
         >
-          <a
-            href="/"
-            className="link"
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
+            }}
           >
-            <img
-              src={GoEventLogo}
-              alt="GoEvent logo"
-              className="logo"
-              width={130}
-              style={{ padding: "20px" }}
-            />
-          </a>
+            <a
+              href="/"
+              className="link"
+            >
+              <img
+                src={GoEventLogo}
+                alt="GoEvent logo"
+                className="logo"
+                width={130}
+                style={{ padding: "20px" }}
+              />
+            </a>
           {/* Navigation links go here — e.g. link to event list, cart, login */}
-          <Link to="/events" className="link">
-            Events
-          </Link>
+            <Link to="/events" className="link">
+              Events
+            </Link>
+          </div>
 
-          {user && (
-            <>
-              <span>{user.email}</span>
-              <button onClick={logout}>Sign out</button>
-            </>
-          )}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
+            }}
+          >
+            {user && (
+              <>
+                <span>{user.email}</span>
+                <button onClick={logout}>Sign out</button>
+              </>
+            )}
 
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </div>
         </nav>
       </header>
 
@@ -51,7 +66,7 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <footer>{/* Footer content goes here */}</footer>
+      <footer>©GoEvent</footer>
     </div>
   );
 }
