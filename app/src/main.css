@@ -16,7 +16,7 @@ body,
   --primary-color: #ff3962;
   --secondary-color: #513e3e;
   --font-heading: 'Playfair Display', serif;
-  --font-body: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 body {
@@ -26,4 +26,56 @@ body {
 
 h1, h2, h3, h4, h5 {
   font-family: var(--font-heading);
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.site-nav-left,
+.site-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  padding: 20px;
+}
+
+.nav-link {
+  min-width: 90px;
+  text-align: center;
+  color: var(--secondary-color);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav-link-primary {
+  color: var(--primary-color);
+}
+
+.nav-link-light {
+  color: color-mix(in srgb, var(--secondary-color) 65%, white);
+}
+
+.app-main {
+  flex: 1;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 16px 20px;
 }

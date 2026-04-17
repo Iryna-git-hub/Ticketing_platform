@@ -6,49 +6,24 @@ export default function Layout() {
   const { user, logout } = useAuth();
 
   return (
-    <div>
+    <div className="app-shell">
       <header>
-        <nav
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "10px 20px",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "20px",
-            }}
-          >
-            <a
-              href="/"
-              className="link"
-            >
+        <nav className="site-nav">
+          <div className="site-nav-left">
+            <a href="/" className="link">
               <img
                 src={GoEventLogo}
                 alt="GoEvent logo"
                 className="logo"
                 width={130}
-                style={{ padding: "20px" }}
               />
             </a>
-          {/* Navigation links go here — e.g. link to event list, cart, login */}
-            <Link to="/events" className="link">
+            <Link to="/events" className="nav-link nav-link-primary">
               Events
             </Link>
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "20px",
-            }}
-          >
+          <div className="site-nav-right">
             {user && (
               <>
                 <span>{user.email}</span>
@@ -56,17 +31,19 @@ export default function Layout() {
               </>
             )}
 
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link to="/login" className="nav-link nav-link-light">Login</Link>
+            <Link to="/register" className="nav-link nav-link-light">Register</Link>
           </div>
         </nav>
       </header>
 
-      <main>
+      <main className="app-main">
         <Outlet />
       </main>
 
-      <footer>©GoEvent</footer>
+      <footer className="site-footer">
+        &copy;GoEvent
+      </footer>
     </div>
   );
 }
