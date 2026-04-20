@@ -56,6 +56,8 @@ export default function EventDetail() {
           >
             {event.ticketsAvailable === 0
               ? "Sold out"
+            : event.ticketsAvailable === 1
+              ? "1 ticket left"
               : `${event.ticketsAvailable} tickets left`}
           </p>
 

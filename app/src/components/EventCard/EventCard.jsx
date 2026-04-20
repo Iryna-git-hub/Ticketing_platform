@@ -27,7 +27,9 @@ export default function EventCard({ event }) {
         </p>
         <p>
           <MapPinIcon />
-          <span>{event.venue}, {event.city}</span>
+          <span>
+            {event.venue}, {event.city}
+          </span>
         </p>
       </div>
 
@@ -45,14 +47,28 @@ export default function EventCard({ event }) {
         >
           {event.ticketsAvailable === 0
             ? "Sold out"
-            : `${event.ticketsAvailable} tickets left`}
+            : event.ticketsAvailable === 1
+              ? "1 ticket left"
+              : `${event.ticketsAvailable} tickets left`}
         </p>
 
         <div className="event-card-actions">
-          <Link className="event-card-link primary-button" to={`/events/${event.id}`}>
-            Get tickets
-          </Link>
-          <Link className="event-card-link secondary-button" to={`/events/${event.id}`}>
+          {event.ticketsAvailable === 0 ? (
+            <button className="event-card-link primary-button" disabled>
+              Buy ticket
+            </button>
+          ) : (
+            <Link
+              className="event-card-link primary-button"
+              to={`/events/${event.id}`}
+            >
+              Buy ticket
+            </Link>
+          )}
+          <Link
+            className="event-card-link secondary-button"
+            to={`/events/${event.id}`}
+          >
             View details
           </Link>
         </div>

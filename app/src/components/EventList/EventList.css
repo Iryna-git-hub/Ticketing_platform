@@ -24,10 +24,6 @@
   line-height: 1.2;
 }
 
-.ticket-divider {
-  margin-inline: -20px;
-}
-
 .event-details {
   display: grid;
   gap: 9px;
