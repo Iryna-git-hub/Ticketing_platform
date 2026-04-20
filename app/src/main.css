@@ -1,0 +1,169 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+:root {
+  --bg: #fcf9f2;
+  --primary-color: #ff3962;
+  --secondary-color: #513e3e;
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --content-width: 1200px;
+}
+
+body {
+  background-color: var(--bg);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-nav {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px;
+}
+
+.site-nav-left,
+.site-nav-right {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  padding: 20px;
+}
+
+.nav-link {
+  min-width: 80px;
+  text-align: center;
+  color: var(--secondary-color);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav-link-primary {
+  color: var(--primary-color);
+}
+
+.nav-link-light {
+  color: color-mix(in srgb, var(--secondary-color) 65%, white);
+}
+
+.app-main {
+  flex: 1;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 16px 20px;
+}
+
+.content-width {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+}
+
+.category-badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 20px;
+  background-color: #ffe8ee;
+  color: var(--primary-color);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.panel-card {
+  border: 1px solid #eadfd8;
+  border-radius: 20px;
+  background-color: #fffdfa;
+}
+
+.ticket-divider {
+  height: 0;
+  margin-block: 4px;
+  border-top: 1px dashed #d9cbc3;
+}
+
+.event-icon {
+  width: 17px;
+  height: 17px;
+  color: var(--primary-color);
+}
+
+.availability {
+  color: var(--primary-color);
+  font-weight: 400;
+}
+
+.availability-sold-out {
+  font-weight: 700;
+  color: rgb(247, 107, 38);
+}
+
+.primary-button {
+  border-color: var(--secondary-color);
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+.primary-button:hover:not(:disabled) {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+}
+
+.secondary-button {
+  background-color: transparent;
+  color: var(--secondary-color);
+}
+
+.secondary-button:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+@media (min-width: 700px) {
+  .site-nav {
+    justify-content: space-between;
+    padding: 10px 20px;
+  }
+
+  .site-nav-left,
+  .site-nav-right {
+    gap: 20px;
+  }
+
+  .nav-link {
+    min-width: 90px;
+  }
+}
