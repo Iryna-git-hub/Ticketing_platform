@@ -1,11 +1,7 @@
-﻿import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import events from "../../data/events.js";
-import {
-  CalendarIcon,
-  ClockIcon,
-  MapPinIcon,
-  TicketIcon,
-} from "../EventIcons/EventIcons.jsx";
+import { CalendarIcon, ClockIcon, MapPinIcon } from "../EventIcons/EventIcons.jsx";
 import "./EventDetail.css";
 
 // TODO: fetch the event from GET /events/:id instead of using mock data
@@ -13,10 +9,41 @@ import "./EventDetail.css";
 export default function EventDetail() {
   const { id } = useParams();
   const event = events.find((item) => String(item.id) === id);
+  const [quantity, setQuantity] = useState(1);
 
   if (!event) {
     return <p className="event-detail-not-found">Event not found.</p>;
   }
+
+  const isSoldOut = event.ticketsAvailable === 0;
+
+  const handleQuantityChange = (e) => {
+    const nextValue = Number(e.target.value);
+
+    if (Number.isNaN(nextValue) || nextValue < 1) {
+      setQuantity(1);
+      return;
+    }
+
+    if (nextValue > event.ticketsAvailable) {
+      setQuantity(event.ticketsAvailable);
+      return;
+    }
+
+    setQuantity(nextValue);
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity((currentQuantity) => Math.max(1, currentQuantity - 1));
+  };
+
+  const increaseQuantity = () => {
+    setQuantity((currentQuantity) =>
+      Math.min(event.ticketsAvailable, currentQuantity + 1),
+    );
+  };
+
+  const totalPrice = event.price * quantity;
 
   return (
     <section className="event-detail-page content-width">
@@ -40,35 +67,76 @@ export default function EventDetail() {
             <MapPinIcon />
             <span>{event.venue}, {event.city}</span>
           </p>
-          <p className="event-detail-price">
-            <span
-              className={
-                event.ticketsAvailable === 0 ? "event-detail-price-sold-out" : ""
-              }
-            >
-              {event.price === 0 ? "Free" : `${event.price} DKK`}
-            </span>
-          </p>
         </div>
 
         <p className="event-detail-description">{event.description}</p>
 
-        <div className="event-detail-footer">
-          <p
-            className={`event-detail-availability availability ${
-              event.ticketsAvailable === 0 ? "availability-sold-out" : ""
-            }`}
-          >
-            {event.ticketsAvailable === 0
-              ? "Sold out"
+        <p className="event-detail-price">
+          <span className={isSoldOut ? "event-detail-price-sold-out" : ""}>
+            {event.price === 0 ? "Free" : `${event.price} DKK`}
+          </span>
+        </p>
+
+        <p
+          className={`event-detail-availability availability ${
+            isSoldOut ? "availability-sold-out" : ""
+          }`}
+        >
+          {isSoldOut
+            ? "Sold out"
             : event.ticketsAvailable === 1
               ? "1 ticket left"
               : `${event.ticketsAvailable} tickets left`}
-          </p>
+        </p>
 
+        {!isSoldOut && (
+          <div className="event-ticket-controls">
+            <label className="event-ticket-quantity" htmlFor="ticket-quantity">
+              Quantity
+            </label>
+
+            <div className="event-ticket-stepper">
+              <button
+                type="button"
+                className="event-ticket-stepper-button"
+                onClick={decreaseQuantity}
+                disabled={quantity === 1}
+                aria-label="Decrease ticket quantity"
+              >
+                -
+              </button>
+
+              <input
+                id="ticket-quantity"
+                className="event-ticket-input"
+                type="number"
+                min="1"
+                max={event.ticketsAvailable}
+                value={quantity}
+                onChange={handleQuantityChange}
+              />
+
+              <button
+                type="button"
+                className="event-ticket-stepper-button"
+                onClick={increaseQuantity}
+                disabled={quantity === event.ticketsAvailable}
+                aria-label="Increase ticket quantity"
+              >
+                +
+              </button>
+            </div>
+
+            <p className="event-ticket-total">
+              Total: {event.price === 0 ? "Free" : `${totalPrice} DKK`}
+            </p>
+          </div>
+        )}
+
+        <div className="event-detail-footer">
           <button
             className="event-detail-button primary-button"
-            disabled={event.ticketsAvailable === 0}
+            disabled={isSoldOut}
           >
             Buy ticket
           </button>

@@ -56,20 +56,74 @@
   line-height: 1.6;
 }
 
-.event-detail-footer {
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 28px;
+.event-detail-price {
+  margin-top: 24px;
 }
 
-.event-detail-availability {
-  font-size: 0.95rem;
+.event-ticket-controls {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.event-ticket-quantity {
+  color: var(--secondary-color);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.event-ticket-stepper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.event-ticket-stepper-button,
+.event-ticket-input {
+  border: 1px solid #d9cbc3;
+  border-radius: 16px;
+  background-color: #fffdfa;
+  color: var(--secondary-color);
+  font: inherit;
+}
+
+.event-ticket-stepper-button {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.event-ticket-stepper-button:disabled {
+  cursor: not-allowed;
+  border-color: var(--disabled-color);
+  color: var(--disabled-color);
+}
+
+.event-ticket-input {
+  width: 84px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.event-ticket-total {
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+
+.event-detail-footer {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-top: 20px;
 }
 
 .event-detail-button {
-  width: 100%;
+  width: auto;
   border: 1px solid var(--secondary-color);
   border-radius: 20px;
   cursor: pointer;
@@ -107,12 +161,6 @@
   }
 
   .event-detail-footer {
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .event-detail-button {
-    width: auto;
+    align-items: flex-start;
   }
 }
