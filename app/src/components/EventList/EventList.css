@@ -54,6 +54,10 @@
   font-weight: 800;
 }
 
+.event-price-row .event-price-sold-out {
+  color: var(--disabled-color);
+}
+
 .event-availability {
   font-size: 0.86rem;
 }

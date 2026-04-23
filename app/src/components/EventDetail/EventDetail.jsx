@@ -41,8 +41,13 @@ export default function EventDetail() {
             <span>{event.venue}, {event.city}</span>
           </p>
           <p className="event-detail-price">
-            <TicketIcon />
-            <span>{event.price === 0 ? "Free" : `${event.price} DKK`}</span>
+            <span
+              className={
+                event.ticketsAvailable === 0 ? "event-detail-price-sold-out" : ""
+              }
+            >
+              {event.price === 0 ? "Free" : `${event.price} DKK`}
+            </span>
           </p>
         </div>
 
