@@ -1,10 +1,5 @@
 ﻿import { Link } from "react-router-dom";
-import {
-  CalendarIcon,
-  ClockIcon,
-  MapPinIcon,
-  TicketIcon,
-} from "../EventIcons/EventIcons.jsx";
+import { CalendarIcon, ClockIcon, MapPinIcon } from "../EventIcons/EventIcons.jsx";
 
 export default function EventCard({ event }) {
   return (
@@ -36,8 +31,13 @@ export default function EventCard({ event }) {
       <div className="event-card-bottom">
         <div className="ticket-divider" aria-hidden="true" />
         <p className="event-price-row">
-          <TicketIcon />
-          <span>{event.price === 0 ? "Free" : `${event.price} DKK`}</span>
+          <span
+            className={
+              event.ticketsAvailable === 0 ? "event-price-sold-out" : ""
+            }
+          >
+            {event.price === 0 ? "Free" : `${event.price} DKK`}
+          </span>
         </p>
 
         <p
