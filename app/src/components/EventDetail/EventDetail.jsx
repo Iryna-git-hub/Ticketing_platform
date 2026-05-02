@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import events from "../../data/events.js";
-import { CalendarIcon, ClockIcon, MapPinIcon } from "../EventIcons/EventIcons.jsx";
+import {
+  CalendarIcon,
+  ClockIcon,
+  MapPinIcon,
+} from "../EventIcons/EventIcons.jsx";
 import "./EventDetail.css";
 
 // TODO: fetch the event from GET /events/:id instead of using mock data
@@ -17,30 +21,28 @@ export default function EventDetail() {
 
   const isSoldOut = event.ticketsAvailable === 0;
 
-  const handleQuantityChange = (e) => {
-    const nextValue = Number(e.target.value);
-
-    if (Number.isNaN(nextValue) || nextValue < 1) {
-      setQuantity(1);
-      return;
+  const getSafeQuantity = (value) => {
+    if (Number.isNaN(value) || value < 1) {
+      return 1;
     }
 
-    if (nextValue > event.ticketsAvailable) {
-      setQuantity(event.ticketsAvailable);
-      return;
+    if (value > event.ticketsAvailable) {
+      return event.ticketsAvailable;
     }
 
-    setQuantity(nextValue);
+    return value;
   };
 
+  const handleQuantityChange = (e) => {
+    const nextValue = Number(e.target.value);
+    setQuantity(getSafeQuantity(nextValue));
+  };
   const decreaseQuantity = () => {
-    setQuantity((currentQuantity) => Math.max(1, currentQuantity - 1));
+    setQuantity((currentQuantity) => getSafeQuantity(currentQuantity - 1));
   };
 
   const increaseQuantity = () => {
-    setQuantity((currentQuantity) =>
-      Math.min(event.ticketsAvailable, currentQuantity + 1),
-    );
+    setQuantity((currentQuantity) => getSafeQuantity(currentQuantity + 1));
   };
 
   const totalPrice = event.price * quantity;
@@ -65,7 +67,9 @@ export default function EventDetail() {
           </p>
           <p>
             <MapPinIcon />
-            <span>{event.venue}, {event.city}</span>
+            <span>
+              {event.venue}, {event.city}
+            </span>
           </p>
         </div>
 
