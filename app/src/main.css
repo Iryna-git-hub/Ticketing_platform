@@ -15,6 +15,7 @@ body,
   --bg: #fcf9f2;
   --primary-color: #ff3962;
   --secondary-color: #513e3e;
+  --disabled-color: #b1a7a5;
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
   --content-width: 1200px;
@@ -128,7 +129,7 @@ h1, h2, h3, h4, h5 {
 
 .availability-sold-out {
   font-weight: 700;
-  color: rgb(247, 107, 38);
+  color: var(--disabled-color);
 }
 
 .primary-button {
@@ -140,6 +141,12 @@ h1, h2, h3, h4, h5 {
 .primary-button:hover:not(:disabled) {
   border-color: var(--primary-color);
   background-color: var(--primary-color);
+}
+
+.primary-button:disabled {
+  border-color: var(--disabled-color);
+  background-color: var(--disabled-color);
+  color: #fff;
 }
 
 .secondary-button {

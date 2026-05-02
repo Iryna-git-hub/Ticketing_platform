@@ -3,7 +3,6 @@ import {
   CalendarIcon,
   ClockIcon,
   MapPinIcon,
-  TicketIcon,
 } from "../EventIcons/EventIcons.jsx";
 
 export default function EventCard({ event }) {
@@ -36,8 +35,11 @@ export default function EventCard({ event }) {
       <div className="event-card-bottom">
         <div className="ticket-divider" aria-hidden="true" />
         <p className="event-price-row">
-          <TicketIcon />
-          <span>{event.price === 0 ? "Free" : `${event.price} DKK`}</span>
+          <span
+            className={event.ticketsAvailable === 0 && "event-price-sold-out"}
+          >
+            {event.price === 0 ? "Free" : `${event.price} DKK`}
+          </span>
         </p>
 
         <p
