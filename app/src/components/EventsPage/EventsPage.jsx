@@ -22,7 +22,7 @@ export default function EventsPage() {
       );
     });
 
-    const sortedEvents = [...filteredEvents].sort((firstEvent, secondEvent) => {
+    const sortedEvents = filteredEvents.sort((firstEvent, secondEvent) => {
       switch (sortBy) {
         case "price-asc":
           return firstEvent.price - secondEvent.price;
