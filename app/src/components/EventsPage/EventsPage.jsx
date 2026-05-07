@@ -12,7 +12,7 @@ export default function EventsPage() {
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const limit = 6;
-  
+
   const totalPages = Math.ceil(totalCount / limit) || 1;
 
   useEffect(() => {
@@ -27,6 +27,26 @@ export default function EventsPage() {
 
       if (filterQuery.trim()) {
         params.set("q", filterQuery.trim());
+      }
+
+      if (sortBy === "date-asc") {
+        params.set("_sort", "date");
+        params.set("_order", "asc");
+      }
+
+      if (sortBy === "price-asc") {
+        params.set("_sort", "price");
+        params.set("_order", "asc");
+      }
+
+      if (sortBy === "price-desc") {
+        params.set("_sort", "price");
+        params.set("_order", "desc");
+      }
+
+      if (sortBy === "available") {
+        params.set("_sort", "ticketsAvailable");
+        params.set("_order", "desc");
       }
 
       try {
@@ -48,7 +68,7 @@ export default function EventsPage() {
     }
 
     fetchEvents();
-  }, [filterQuery, page]);
+  }, [filterQuery, page, sortBy]);
 
   return (
     <section className="events-page">
@@ -74,7 +94,13 @@ export default function EventsPage() {
 
           <label className="events-toolbar-field">
             <span>Sort by</span>
-            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+            <select
+              value={sortBy}
+              onChange={(e) => {
+                setSortBy(e.target.value);
+                setPage(1);
+              }}
+            >
               <option value="date-asc">Earliest first</option>
               <option value="price-asc">Price: low to high</option>
               <option value="price-desc">Price: high to low</option>
