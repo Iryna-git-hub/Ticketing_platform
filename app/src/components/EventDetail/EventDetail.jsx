@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
-import events from "../../data/events.js";
+import { useEffect, useState } from "react";
+import api from "../../api.js";
 import {
   CalendarIcon,
   ClockIcon,
@@ -12,8 +12,49 @@ import "./EventDetail.css";
 
 export default function EventDetail() {
   const { id } = useParams();
-  const event = events.find((item) => String(item.id) === id);
   const [quantity, setQuantity] = useState(1);
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function fetchEvent() {
+      setLoading(true);
+      setError("");
+
+      try {
+        const response = await fetch(api(`/events/&{id}`));
+
+        if (response.status === 404) {
+          throw new Error("Event not found.");
+        }
+
+        if (!response) {
+          throw new Error("Could not load event details.");
+        }
+
+        const data = await response.json();
+        setEvent(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchEvent();
+  }, [id]);
+
+  if (loading) {
+    return <p className="event-detail-not-found">Loading event...</p>;
+  }
+
+  if (error) {
+    return (
+      <p className="event-detail-not-found" role="alert">
+        {error}
+      </p>
+    );
+  }
 
   if (!event) {
     return <p className="event-detail-not-found">Event not found.</p>;
