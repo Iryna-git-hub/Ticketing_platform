@@ -8,8 +8,6 @@ import {
 } from "../EventIcons/EventIcons.jsx";
 import "./EventDetail.css";
 
-// TODO: fetch the event from GET /events/:id instead of using mock data
-
 export default function EventDetail() {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
