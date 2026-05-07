@@ -1,43 +1,67 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import EventList from "../EventList/EventList.jsx";
-import events from "../../data/events.js";
+import api from "../../api.js";
 import "./EventsPage.css";
 
 export default function EventsPage() {
-  const [filterQuery, setFilterQuery] = useState("");
-  const [sortBy, setSortBy] = useState("date-asc");
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const visibleEvents = useMemo(() => {
-    const normalizedQuery = filterQuery.trim().toLowerCase();
+  useEffect(() => {
+    async function fetchEvents() {
+      setLoading(true);
+      setError("");
 
-    const filteredEvents = events.filter((event) => {
-      if (!normalizedQuery) {
-        return true;
+      try {
+        const params = new URLSearchParams({
+          _page: String(page),
+          _limit: String(limit),
+        });
+
+        if (filterQuery.trim()) {
+          params.set("q", filterQuery.trim());
+        }
+
+        if (sortBy === "date-asc") {
+          params.set("_sort", "date");
+          params.set("_order", "asc");
+        }
+
+        if (sortBy === "price-asc") {
+          params.set("_sort", "price");
+          params.set("_order", "asc");
+        }
+
+        if (sortBy === "price-desc") {
+          params.set("_sort", "price");
+          params.set("_order", "desc");
+        }
+
+        if (sortBy === "available") {
+          params.set("_sort", "ticketsAvailable");
+          params.set("_order", "desc");
+        }
+
+        const response = await fetch(api(`/events?${params.toString()}`));
+
+        if (!response.ok) {
+          throw new Error("Could not load events. Please try again.");
+        }
+
+        const data = await response.json();
+
+        setEvents(data);
+        setTotalCount(Number(response.headers.get("X-Total-Count")) || 0);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
+    }
 
-      return (
-        event.name.toLowerCase().includes(normalizedQuery) ||
-        event.category.toLowerCase().includes(normalizedQuery) ||
-        event.city.toLowerCase().includes(normalizedQuery)
-      );
-    });
-
-    const sortedEvents = filteredEvents.sort((firstEvent, secondEvent) => {
-      switch (sortBy) {
-        case "price-asc":
-          return firstEvent.price - secondEvent.price;
-        case "price-desc":
-          return secondEvent.price - firstEvent.price;
-        case "available":
-          return secondEvent.ticketsAvailable - firstEvent.ticketsAvailable;
-        case "date-asc":
-        default:
-          return new Date(firstEvent.date) - new Date(secondEvent.date);
-      }
-    });
-
-    return sortedEvents;
-  }, [filterQuery, sortBy]);
+    fetchEvents();
+  }, [filterQuery, sortBy, page]);
 
   return (
     <section className="events-page">
@@ -53,17 +77,18 @@ export default function EventsPage() {
             <input
               type="text"
               value={filterQuery}
-              onChange={(e) => setFilterQuery(e.target.value)}
+              onChange={(e) => {
+                setFilterQuery(e.target.value);
+                setPage(1);
+              }
+                }
               placeholder="Search by event, category, or city"
             />
           </label>
 
           <label className="events-toolbar-field">
             <span>Sort by</span>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-            >
+            <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
               <option value="date-asc">Earliest first</option>
               <option value="price-asc">Price: low to high</option>
               <option value="price-desc">Price: high to low</option>
@@ -73,7 +98,7 @@ export default function EventsPage() {
         </div>
       </div>
 
-      <EventList events={visibleEvents} />
+      <EventList events={events} />
     </section>
   );
 }
