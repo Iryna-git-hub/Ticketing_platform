@@ -7,6 +7,9 @@ export default function EventsPage() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [filterQuery, setFilterQuery] = useState("");
+  const [sortBy, setSortBy] = useState("date-asc");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function fetchEvents() {
@@ -14,45 +17,14 @@ export default function EventsPage() {
       setError("");
 
       try {
-        const params = new URLSearchParams({
-          _page: String(page),
-          _limit: String(limit),
-        });
-
-        if (filterQuery.trim()) {
-          params.set("q", filterQuery.trim());
-        }
-
-        if (sortBy === "date-asc") {
-          params.set("_sort", "date");
-          params.set("_order", "asc");
-        }
-
-        if (sortBy === "price-asc") {
-          params.set("_sort", "price");
-          params.set("_order", "asc");
-        }
-
-        if (sortBy === "price-desc") {
-          params.set("_sort", "price");
-          params.set("_order", "desc");
-        }
-
-        if (sortBy === "available") {
-          params.set("_sort", "ticketsAvailable");
-          params.set("_order", "desc");
-        }
-
-        const response = await fetch(api(`/events?${params.toString()}`));
+        const response = await fetch(api("/events"));
 
         if (!response.ok) {
           throw new Error("Could not load events. Please try again.");
         }
 
         const data = await response.json();
-
         setEvents(data);
-        setTotalCount(Number(response.headers.get("X-Total-Count")) || 0);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -61,7 +33,7 @@ export default function EventsPage() {
     }
 
     fetchEvents();
-  }, [filterQuery, sortBy, page]);
+  }, []);
 
   return (
     <section className="events-page">
@@ -80,8 +52,7 @@ export default function EventsPage() {
               onChange={(e) => {
                 setFilterQuery(e.target.value);
                 setPage(1);
-              }
-                }
+              }}
               placeholder="Search by event, category, or city"
             />
           </label>
@@ -98,7 +69,14 @@ export default function EventsPage() {
         </div>
       </div>
 
-      <EventList events={events} />
+      {loading && <p className="content-width">Loading events...</p>}
+      {error && (
+        <p className="content-width" role="alert">
+          {error}
+        </p>
+      )}
+
+      {!loading && !error && <EventList events={events} />}
     </section>
   );
 }
