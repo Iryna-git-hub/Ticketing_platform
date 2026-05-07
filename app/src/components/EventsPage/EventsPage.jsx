@@ -10,20 +10,35 @@ export default function EventsPage() {
   const [filterQuery, setFilterQuery] = useState("");
   const [sortBy, setSortBy] = useState("date-asc");
   const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const limit = 6;
+  
+  const totalPages = Math.ceil(totalCount / limit) || 1;
 
   useEffect(() => {
     async function fetchEvents() {
+      const params = new URLSearchParams({
+        _page: String(page),
+        _limit: String(limit),
+      });
+
       setLoading(true);
       setError("");
 
+      if (filterQuery.trim()) {
+        params.set("q", filterQuery.trim());
+      }
+
       try {
-        const response = await fetch(api("/events"));
+        const response = await fetch(api(`/events?${params.toString()}`));
 
         if (!response.ok) {
           throw new Error("Could not load events. Please try again.");
         }
 
         const data = await response.json();
+        setTotalCount(Number(response.headers.get("X-Total-Count")) || 0);
+
         setEvents(data);
       } catch (err) {
         setError(err.message);
@@ -33,7 +48,7 @@ export default function EventsPage() {
     }
 
     fetchEvents();
-  }, []);
+  }, [filterQuery, page]);
 
   return (
     <section className="events-page">
@@ -77,6 +92,24 @@ export default function EventsPage() {
       )}
 
       {!loading && !error && <EventList events={events} />}
+      {!loading && !error && (
+        <div className="content-width">
+          <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+            &lsaquo;
+          </button>
+
+          <span>
+            Page {page} of {totalPages}
+          </span>
+
+          <button
+            disabled={page >= totalPages}
+            onClick={() => setPage(page + 1)}
+          >
+            &rsaquo;
+          </button>
+        </div>
+      )}
     </section>
   );
 }
