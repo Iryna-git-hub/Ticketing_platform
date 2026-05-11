@@ -21,9 +21,13 @@ html {
   --secondary-color: #513e3e;
   --disabled-color: #b1a7a5;
   --panel-card-border: #eadfd8;
-  --panel-card-hover-border: color-mix(in srgb, var(--secondary-color) 35%, #eadfd8);
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --panel-card-hover-border: color-mix(
+    in srgb,
+    var(--secondary-color) 35%,
+    #eadfd8
+  );
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
   --content-width: 1200px;
 }
 
@@ -32,7 +36,11 @@ body {
   font-family: var(--font-body);
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: var(--font-heading);
 }
 
@@ -40,6 +48,12 @@ h1, h2, h3, h4, h5 {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+header,
+main,
+footer {
+  padding: 0 24px;
 }
 
 .site-nav {
@@ -89,7 +103,7 @@ h1, h2, h3, h4, h5 {
 
 .site-footer {
   text-align: center;
-  padding: 16px 20px;
+  padding: 16px 24px;
 }
 
 .content-width {
@@ -124,8 +138,6 @@ h1, h2, h3, h4, h5 {
 .events-toolbar.panel-card:hover {
   border-color: var(--panel-card-border);
 }
-
-
 
 .ticket-divider {
   height: 0;

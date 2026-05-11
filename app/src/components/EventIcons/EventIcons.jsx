@@ -54,3 +54,12 @@ export function TicketIcon() {
     </Icon>
   );
 }
+
+export function SearchIcon() {
+  return (
+    <Icon>
+      <circle cx="11" cy="11" r="6" />
+      <path d="m20 20-3.5-3.5" />
+    </Icon>
+  );
+}
