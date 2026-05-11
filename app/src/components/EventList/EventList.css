@@ -3,7 +3,13 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
   list-style: none;
-  padding: 24px;
+  padding: 24px 0;
+}
+
+@media (min-width: 1200px) {
+  .events-list {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 288px));
+  }
 }
 
 .events-empty-state {
@@ -30,8 +36,51 @@
   padding: 20px;
 }
 
-.event-card:hover {
-  border-color: var(--primary-color);
+.event-card .ticket-divider {
+  position: relative;
+  margin-inline: -20px;
+}
+
+.event-card .ticket-divider::before,
+.event-card .ticket-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 20px;
+  border: 1px solid var(--panel-card-border);
+  background: var(--bg);
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: border-color 0.2s ease;
+}
+
+.event-card .ticket-divider::before {
+  left: -1px;
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.event-card .ticket-divider::after {
+  right: -1px;
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+.event-card:hover .ticket-divider::before,
+.event-card:hover .ticket-divider::after {
+  border-color: var(--panel-card-hover-border);
+}
+
+.event-card:hover .event-title {
+  font-size: 1.4rem;
+  transition: 0.2s ease;
+}
+
+.event-card:hover .category-badge {
+  font-size: 0.6rem;
+  padding: 5px 7px;
+  transition: 0.2s ease;
 }
 
 .event-title {
@@ -49,13 +98,13 @@
 .event-details p,
 .event-price-row {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 9px;
 }
 
 .event-details span {
   color: var(--secondary-color);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .event-card-bottom {
@@ -66,8 +115,8 @@
 
 .event-price-row span {
   color: var(--secondary-color);
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 700;
 }
 
 .event-price-row .event-price-sold-out {
@@ -89,7 +138,7 @@
   justify-content: center;
   border: 1px solid var(--secondary-color);
   border-radius: 20px;
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   font-weight: 700;
   padding: 11px 16px;
   text-decoration: none;

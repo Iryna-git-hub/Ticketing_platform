@@ -11,11 +11,17 @@ body,
   width: 100%;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 :root {
-  --bg: #fcf9f2;
+  --bg: #f7f3ea;
   --primary-color: #ff3962;
   --secondary-color: #513e3e;
   --disabled-color: #b1a7a5;
+  --panel-card-border: #eadfd8;
+  --panel-card-hover-border: color-mix(in srgb, var(--secondary-color) 35%, #eadfd8);
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', sans-serif;
   --content-width: 1200px;
@@ -105,10 +111,21 @@ h1, h2, h3, h4, h5 {
 }
 
 .panel-card {
-  border: 1px solid #eadfd8;
-  border-radius: 20px;
-  background-color: #fffdfa;
+  border: 1px solid var(--panel-card-border);
+  border-radius: 10px;
+  background-color: #fff;
+  transition: border-color 0.2s ease;
 }
+
+.panel-card:hover {
+  border-color: var(--panel-card-hover-border);
+}
+
+.events-toolbar.panel-card:hover {
+  border-color: var(--panel-card-border);
+}
+
+
 
 .ticket-divider {
   height: 0;
@@ -162,7 +179,7 @@ h1, h2, h3, h4, h5 {
 @media (min-width: 700px) {
   .site-nav {
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 10px 0;
   }
 
   .site-nav-left,

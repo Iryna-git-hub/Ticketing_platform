@@ -11,7 +11,7 @@ export default function EventsPage() {
   const [sortBy, setSortBy] = useState("date-asc");
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  const limit = 6;
+  const limit = 8;
 
   const totalPages = Math.ceil(totalCount / limit) || 1;
 
@@ -72,11 +72,12 @@ export default function EventsPage() {
 
   return (
     <section className="events-page">
+      <div className="content-width">
+        <h1>Find your next event</h1>
+      </div>
+      
       <div className="events-toolbar content-width panel-card">
-        <div className="events-toolbar-copy">
-          <h1>Find your next event</h1>
-          <p>Search events and sort by date, price, or ticket availability.</p>
-        </div>
+        
 
         <div className="events-toolbar-controls">
           <label className="events-toolbar-field">
@@ -119,7 +120,7 @@ export default function EventsPage() {
 
       {!loading && !error && <EventList events={events} />}
       {!loading && !error && (
-        <div className="content-width">
+        <div className="content-width pagination">
           <button disabled={page === 1} onClick={() => setPage(page - 1)}>
             &lsaquo;
           </button>
