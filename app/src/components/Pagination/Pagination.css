@@ -1,0 +1,46 @@
+.pagination-panel.panel-card:hover {
+  border-color: var(--panel-card-border);
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  padding: 16px;
+}
+
+.pagination-button {
+  min-width: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border: 1px solid var(--panel-card-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--secondary-color);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.pagination-button:hover:not(:disabled),
+.pagination-button.active {
+  border-color: var(--primary-color);
+  background-color: var(--tertiary-color);
+}
+
+.pagination-button.active {
+  color: var(--primary-color);
+}
+
+.pagination-button:disabled {
+  color: var(--disabled-color);
+  cursor: not-allowed;
+  pointer-events: none;
+}

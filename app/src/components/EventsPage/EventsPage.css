@@ -129,7 +129,7 @@
   max-width: min(90vw, 420px);
   z-index: 20;
   border: 1px solid #eadfd8;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #fff;
   box-shadow: 0 10px 24px rgb(81 62 62 / 12%);
   list-style: none;

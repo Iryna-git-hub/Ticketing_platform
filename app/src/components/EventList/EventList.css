@@ -48,7 +48,7 @@
   top: 50%;
   width: 10px;
   height: 20px;
-  border: 1px solid var(--panel-card-border);
+  border: 2px solid var(--panel-card-border);
   background: var(--bg);
   transform: translateY(-50%);
   pointer-events: none;
@@ -56,13 +56,13 @@
 }
 
 .event-card .ticket-divider::before {
-  left: -1px;
+  left: -2px;
   border-left: 0;
   border-radius: 0 10px 10px 0;
 }
 
 .event-card .ticket-divider::after {
-  right: -1px;
+  right: -2px;
   border-right: 0;
   border-radius: 10px 0 0 10px;
 }
@@ -142,6 +142,7 @@
   padding: 11px 16px;
   text-decoration: none;
   text-transform: uppercase;
+  transition: 0.2s ease;
 }
 
 .event-card-link:focus-visible {

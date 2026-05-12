@@ -42,7 +42,7 @@ export default function Layout() {
       </main>
 
       <footer className="site-footer content-width">
-        &copy;GoEvent
+        Copyright &copy; 2026 GoEvent
       </footer>
     </div>
   );

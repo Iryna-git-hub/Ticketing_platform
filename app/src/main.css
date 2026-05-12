@@ -131,7 +131,7 @@ footer {
 }
 
 .panel-card {
-  border: 1px solid var(--panel-card-border);
+  border: 2px solid var(--panel-card-border);
   border-radius: 10px;
   background-color: #fff;
   transition: border-color 0.2s ease;

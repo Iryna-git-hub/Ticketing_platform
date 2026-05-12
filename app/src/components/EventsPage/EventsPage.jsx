@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import EventList from "../EventList/EventList.jsx";
+import Pagination from "../Pagination/Pagination.jsx";
 import { SearchIcon } from "../EventIcons/EventIcons.jsx";
 import api from "../../api.js";
 import "./EventsPage.css";
@@ -185,22 +186,12 @@ export default function EventsPage() {
 
       {!loading && !error && <EventList events={events} />}
       {!loading && !error && (
-        <div className="content-width pagination">
-          <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-            &lsaquo;
-          </button>
+        
+          <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
 
-          <span>
-            Page {page} of {totalPages}
-          </span>
-
-          <button
-            disabled={page >= totalPages}
-            onClick={() => setPage(page + 1)}
-          >
-            &rsaquo;
-          </button>
-        </div>
+       
+        
+        
       )}
     </section>
   );
