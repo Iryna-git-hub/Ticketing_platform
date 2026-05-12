@@ -6,6 +6,8 @@ import {
 } from "../EventIcons/EventIcons.jsx";
 
 export default function EventCard({ event }) {
+  const formatPrice = (price) => (Number(price) === 0 ? "Free" : `${Number(price).toFixed(2)} DKK`);
+
   return (
     <li className="event-card panel-card">
       <div className="event-card-top">
@@ -38,7 +40,7 @@ export default function EventCard({ event }) {
           <span
             className={event.ticketsAvailable === 0 && "event-price-sold-out"}
           >
-            {event.price === 0 ? "Free" : `${event.price} DKK`}
+            {formatPrice(event.price)}
           </span>
         </p>
 

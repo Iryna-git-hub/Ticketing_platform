@@ -7,23 +7,78 @@
 .event-detail-card {
   width: 100%;
   max-width: 760px;
-  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+}
+
+.event-detail-page .event-detail-card:hover {
+  border: 1px solid var(--panel-card-border);
 }
 
 .event-detail-card h1 {
-  margin-top: 16px;
   color: var(--secondary-color);
   font-size: 1.55rem;
   line-height: 1.2;
 }
 
+.event-detail-card h2 {
+  color: var(--secondary-color);
+}
+
 .event-detail-divider {
-  margin: 20px -22px;
+  position: relative;
+  margin: 16px -22px;
+}
+
+.event-detail-divider::before,
+.event-detail-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 20px;
+  border: 1px solid var(--panel-card-border);
+  background: var(--bg);
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: border-color 0.2s ease;
+}
+
+.event-detail-divider::before {
+  left: -1px;
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.event-detail-divider::after {
+  right: -1px;
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
 }
 
 .event-detail-info {
   display: grid;
   gap: 12px;
+  font-size: 1rem;
+  padding: 24px;
+  background-color: #faf8f6;
+  border-radius: var(--radius-8);
+}
+
+.event-detail-meta-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.event-detail-status {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 24px;
+  background-color: #faf8f6;
+  border-radius: var(--radius-8);
 }
 
 .event-detail-info p {
@@ -34,15 +89,16 @@
 
 .event-detail-info span {
   color: var(--secondary-color);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .event-detail-price {
-  margin-top: 8px;
+  margin: 0;
 }
 
-.event-detail-price span {
-  font-size: 1.6rem;
+.event-detail-price > span {
+  color: var(--secondary-color);
+  font-size: 1.2rem;
   font-weight: 800;
 }
 
@@ -51,19 +107,27 @@
 }
 
 .event-detail-description {
-  margin-top: 24px;
   color: var(--secondary-color);
   line-height: 1.6;
-}
-
-.event-detail-price {
-  margin-top: 24px;
 }
 
 .event-ticket-controls {
   display: grid;
   gap: 12px;
-  margin-top: 20px;
+}
+
+.event-ticket-purchase-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.event-ticket-quantity-group {
+  display: grid;
+  gap: 4px;
+  width: fit-content;
 }
 
 .event-ticket-quantity {
@@ -76,44 +140,95 @@
 .event-ticket-stepper {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0;
+  border: 1px solid var(--panel-card-hover-border);
+  border-radius: 7px;
+  background-color: #fff;
+  padding: 0;
+  overflow: hidden;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.event-ticket-stepper:hover {
+  border-color: var(--primary-color);
+  background-color: #fff;
+}
+
+.event-ticket-stepper:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgb(255 57 98 / 12%);
 }
 
 .event-ticket-stepper-button,
 .event-ticket-input {
-  border: 1px solid #d9cbc3;
-  border-radius: 16px;
-  background-color: #fffdfa;
+  border: 0;
+  background-color: transparent;
   color: var(--secondary-color);
   font: inherit;
 }
 
+.event-ticket-input:focus-visible {
+  outline: none;
+}
+
 .event-ticket-stepper-button {
   width: 44px;
-  height: 44px;
+  height: 36px;
+  padding: 0;
   cursor: pointer;
   font-size: 1.3rem;
+  line-height: 1;
   font-weight: 700;
+}
+
+.event-ticket-stepper-button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 .event-ticket-stepper-button:disabled {
   cursor: not-allowed;
-  border-color: var(--disabled-color);
   color: var(--disabled-color);
 }
 
 .event-ticket-input {
-  width: 84px;
-  padding: 10px 14px;
+  width: 72px;
+  padding: 6px 8px;
   font-size: 1rem;
   font-weight: 700;
   text-align: center;
 }
 
 .event-ticket-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #faf8f6;
   color: var(--secondary-color);
   font-weight: 700;
+  padding: 16px;
+  border-radius: 8px;
 }
+
+.event-ticket-total-value {
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.event-money-whole {
+  font-size: 1em;
+}
+
+.event-money-decimals, .event-money-currency {
+  font-size: 0.7em;
+}
+
+
 
 .event-detail-footer {
   display: flex;
@@ -132,6 +247,14 @@
   font-weight: 700;
   padding: 12px 22px;
   text-transform: uppercase;
+}
+
+.event-detail-availability {
+  font-size: 0.86rem;
+}
+
+.event-ticket-purchase-row .event-detail-button {
+  align-self: flex-end;
 }
 
 .event-detail-button:disabled {
@@ -153,11 +276,16 @@
   }
 
   .event-detail-card h1 {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 
-  .event-detail-divider {
-    margin-inline: -28px;
+  .event-detail-meta-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+    align-items: stretch;
+  }
+
+  .event-detail-page .event-detail-divider {
+    margin: 16px -28px;
   }
 
   .event-detail-footer {

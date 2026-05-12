@@ -21,7 +21,7 @@ export default function EventDetail() {
       setError("");
 
       try {
-        const response = await fetch(api(`/events/&{id}`));
+        const response = await fetch(api(`/events/${id}`));
 
         if (response.status === 404) {
           throw new Error("Event not found.");
@@ -59,6 +59,33 @@ export default function EventDetail() {
   }
 
   const isSoldOut = event.ticketsAvailable === 0;
+  const getPriceParts = (price) => {
+    const [whole, decimals] = Number(price).toFixed(2).split(".");
+    return {
+      whole: whole.padStart(2, "0"),
+      decimals,
+    };
+  };
+
+  const renderPrice = (price) => {
+    const { whole, decimals } = getPriceParts(price);
+
+    return (
+      <>
+        <span className="event-money-whole">{whole}</span>
+        <span className="event-money-decimals">.{decimals}</span>
+        <span className="event-money-currency"> DKK</span>
+      </>
+    );
+  };
+
+  const renderEventPrice = (price) => {
+    if (Number(price) === 0) {
+      return <span className="event-money-whole">Free</span>;
+    }
+
+    return renderPrice(price);
+  };
 
   const getSafeQuantity = (value) => {
     if (Number.isNaN(value) || value < 1) {
@@ -95,95 +122,123 @@ export default function EventDetail() {
 
         <div className="event-detail-divider ticket-divider" />
 
-        <div className="event-detail-info">
-          <p>
-            <CalendarIcon />
-            <span>{event.date}</span>
-          </p>
-          <p>
-            <ClockIcon />
-            <span>{event.time}</span>
-          </p>
-          <p>
-            <MapPinIcon />
-            <span>
-              {event.venue}, {event.city}
-            </span>
-          </p>
+        <div className="event-detail-meta-grid">
+          <div className="event-detail-info">
+            <p>
+              <CalendarIcon />
+              <span>{event.date}</span>
+            </p>
+            <p>
+              <ClockIcon />
+              <span>{event.time}</span>
+            </p>
+            <p>
+              <MapPinIcon />
+              <span>
+                {event.venue}, {event.city}
+              </span>
+            </p>
+          </div>
+
+          <aside
+            className="event-detail-status"
+            aria-label="Ticket pricing and availability"
+          >
+            <p className="event-detail-price">
+              <span className={isSoldOut ? "event-detail-price-sold-out" : ""}>
+                {renderEventPrice(event.price)}
+              </span>
+            </p>
+
+            {!isSoldOut && (
+              <div className="event-ticket-quantity-group">
+                
+
+                <div className="event-ticket-stepper">
+                  <button
+                    type="button"
+                    className="event-ticket-stepper-button"
+                    onClick={decreaseQuantity}
+                    disabled={quantity === 1}
+                    aria-label="Decrease ticket quantity"
+                  >
+                    -
+                  </button>
+
+                  <input
+                    id="ticket-quantity"
+                    className="event-ticket-input"
+                    type="number"
+                    min="1"
+                    max={event.ticketsAvailable}
+                    value={quantity}
+                    onChange={handleQuantityChange}
+                  />
+
+                  <button
+                    type="button"
+                    className="event-ticket-stepper-button"
+                    onClick={increaseQuantity}
+                    disabled={quantity === event.ticketsAvailable}
+                    aria-label="Increase ticket quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <p
+              className={`event-detail-availability availability ${
+                isSoldOut ? "availability-sold-out" : ""
+              }`}
+            >
+              {isSoldOut
+                ? "Sold out"
+                : event.ticketsAvailable === 1
+                  ? "1 ticket left"
+                  : `${event.ticketsAvailable} tickets left`}
+            </p>
+          </aside>
         </div>
+
+        <h2>Overview</h2>
 
         <p className="event-detail-description">{event.description}</p>
 
-        <p className="event-detail-price">
-          <span className={isSoldOut ? "event-detail-price-sold-out" : ""}>
-            {event.price === 0 ? "Free" : `${event.price} DKK`}
-          </span>
-        </p>
-
-        <p
-          className={`event-detail-availability availability ${
-            isSoldOut ? "availability-sold-out" : ""
-          }`}
-        >
-          {isSoldOut
-            ? "Sold out"
-            : event.ticketsAvailable === 1
-              ? "1 ticket left"
-              : `${event.ticketsAvailable} tickets left`}
-        </p>
+        <div className="event-detail-divider ticket-divider" />
 
         {!isSoldOut && (
           <div className="event-ticket-controls">
-            <label className="event-ticket-quantity" htmlFor="ticket-quantity">
-              Quantity
-            </label>
+            <p className="event-ticket-total">
+              <span className="event-ticket-total-label">Total</span>
+              <span className="event-ticket-total-value">
+                {renderPrice(totalPrice)}
+              </span>
+            </p>
 
-            <div className="event-ticket-stepper">
+            <div className="event-ticket-purchase-row">
               <button
                 type="button"
-                className="event-ticket-stepper-button"
-                onClick={decreaseQuantity}
-                disabled={quantity === 1}
-                aria-label="Decrease ticket quantity"
+                className="event-detail-button primary-button"
               >
-                -
-              </button>
-
-              <input
-                id="ticket-quantity"
-                className="event-ticket-input"
-                type="number"
-                min="1"
-                max={event.ticketsAvailable}
-                value={quantity}
-                onChange={handleQuantityChange}
-              />
-
-              <button
-                type="button"
-                className="event-ticket-stepper-button"
-                onClick={increaseQuantity}
-                disabled={quantity === event.ticketsAvailable}
-                aria-label="Increase ticket quantity"
-              >
-                +
+                Buy ticket
               </button>
             </div>
-
-            <p className="event-ticket-total">
-              Total: {event.price === 0 ? "Free" : `${totalPrice} DKK`}
-            </p>
           </div>
         )}
 
-        <div className="event-detail-footer">
-          <button
-            className="event-detail-button primary-button"
-            disabled={isSoldOut}
-          >
-            Buy ticket
-          </button>
-        </div>
+        {isSoldOut && (
+          <div className="event-detail-footer">
+            <button
+              type="button"
+              className="event-detail-button primary-button"
+              disabled
+            >
+              Buy ticket
+            </button>
+          </div>
+        )}
       </article>
     </section>
   );

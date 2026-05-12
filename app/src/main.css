@@ -20,6 +20,7 @@ html {
   --primary-color: #ff3962;
   --secondary-color: #513e3e;
   --disabled-color: #b1a7a5;
+  --radius-8: 8px;
   --panel-card-border: #eadfd8;
   --panel-card-hover-border: color-mix(
     in srgb,
@@ -43,6 +44,10 @@ h4,
 h5 {
   font-family: var(--font-heading);
 }
+
+h2 {
+  font-size: 1.25rem;
+} 
 
 .app-shell {
   min-height: 100vh;
@@ -184,6 +189,7 @@ footer {
 }
 
 .secondary-button:hover {
+  background-color: #ffe8ee;
   border-color: var(--primary-color);
   color: var(--primary-color);
 }
