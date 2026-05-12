@@ -17,8 +17,9 @@ html {
 
 :root {
   --bg: #f7f3ea;
-  --primary-color: #ff3962;
+  --primary-color: #e55f37;
   --secondary-color: #513e3e;
+  --tertiary-color: #fff1ed;
   --disabled-color: #b1a7a5;
   --radius-8: 8px;
   --panel-card-border: #eadfd8;
@@ -81,7 +82,7 @@ footer {
 }
 
 .logo {
-  padding: 20px;
+  padding: 20px 20px 20px 0;
 }
 
 .nav-link {
@@ -122,7 +123,7 @@ footer {
   width: fit-content;
   padding: 7px 10px;
   border-radius: 20px;
-  background-color: #ffe8ee;
+  background-color: var(--tertiary-color);
   color: var(--primary-color);
   font-size: 0.72rem;
   font-weight: 700;
@@ -189,7 +190,6 @@ footer {
 }
 
 .secondary-button:hover {
-  background-color: #ffe8ee;
   border-color: var(--primary-color);
   color: var(--primary-color);
 }
@@ -208,4 +208,22 @@ footer {
   .nav-link {
     min-width: 90px;
   }
+}
+
+.event-money-whole {
+  font-size: 1em;
+}
+
+.event-money-decimals,
+.event-money-currency {
+  font-size: 0.7em;
+}
+
+.event-price-row .event-money-whole {
+  font-size: 1.15rem;
+}
+
+.event-price-row .event-money-decimals,
+.event-price-row .event-money-currency {
+  font-size: 0.8em;
 }

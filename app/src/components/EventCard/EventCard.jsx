@@ -6,7 +6,33 @@ import {
 } from "../EventIcons/EventIcons.jsx";
 
 export default function EventCard({ event }) {
-  const formatPrice = (price) => (Number(price) === 0 ? "Free" : `${Number(price).toFixed(2)} DKK`);
+  const getPriceParts = (price) => {
+    const [whole, decimals] = Number(price).toFixed(2).split(".");
+    return {
+      whole: whole.padStart(2, "0"),
+      decimals,
+    };
+  };
+
+  const renderPrice = (price) => {
+    const { whole, decimals } = getPriceParts(price);
+
+    return (
+      <>
+        <span className="event-money-whole">{whole}</span>
+        <span className="event-money-decimals">.{decimals}</span>
+        <span className="event-money-currency"> DKK</span>
+      </>
+    );
+  };
+
+  const renderEventPrice = (price) => {
+    if (Number(price) === 0) {
+      return <span className="event-money-whole">Free</span>;
+    }
+
+    return renderPrice(price);
+  };
 
   return (
     <li className="event-card panel-card">
@@ -40,7 +66,7 @@ export default function EventCard({ event }) {
           <span
             className={event.ticketsAvailable === 0 && "event-price-sold-out"}
           >
-            {formatPrice(event.price)}
+            {renderEventPrice(event.price)}
           </span>
         </p>
 

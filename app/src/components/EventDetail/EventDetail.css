@@ -1,7 +1,50 @@
 .event-detail-page {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   padding: 24px 16px;
+}
+
+.event-detail-back {
+  width: 100%;
+  max-width: 760px;
+  margin-bottom: 12px;
+}
+
+.event-detail-back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--panel-card-hover-border);
+  border-radius: 7px;
+  background-color: #fff;
+  color: var(--secondary-color);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 10px 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.event-detail-back-link:hover {
+  border-color: var(--primary-color);
+  background-color: #fff;
+}
+
+.event-detail-back-link:focus-visible {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.event-detail-back-link::before {
+  content: "<-";
+  line-height: 1;
 }
 
 .event-detail-card {
@@ -190,8 +233,9 @@
 }
 
 .event-ticket-stepper-button:disabled {
-  cursor: not-allowed;
+  cursor: default;
   color: var(--disabled-color);
+  background-color: #faf8f6;
 }
 
 .event-ticket-input {
@@ -219,16 +263,6 @@
   font-size: 1.2rem;
   font-weight: 800;
 }
-
-.event-money-whole {
-  font-size: 1em;
-}
-
-.event-money-decimals, .event-money-currency {
-  font-size: 0.7em;
-}
-
-
 
 .event-detail-footer {
   display: flex;

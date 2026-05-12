@@ -15,7 +15,7 @@ export default function Layout() {
                 src={GoEventLogo}
                 alt="GoEvent logo"
                 className="logo"
-                width={130}
+                width={100}
               />
             </a>
             <Link to="/events" className="nav-link nav-link-primary">

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../api.js";
 import {
@@ -115,6 +115,12 @@ export default function EventDetail() {
 
   return (
     <section className="event-detail-page content-width">
+      <div className="event-detail-back">
+        <Link to="/events" className="event-detail-back-link">
+          Back to events
+        </Link>
+      </div>
+
       <article className="event-detail-card panel-card">
         <span className="category-badge">{event.category}</span>
 
@@ -162,7 +168,7 @@ export default function EventDetail() {
                     disabled={quantity === 1}
                     aria-label="Decrease ticket quantity"
                   >
-                    -
+                    −
                   </button>
 
                   <input
