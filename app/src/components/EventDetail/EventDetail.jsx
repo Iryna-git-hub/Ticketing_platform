@@ -59,22 +59,15 @@ export default function EventDetail() {
   }
 
   const isSoldOut = event.ticketsAvailable === 0;
-  const getPriceParts = (price) => {
-    const [whole, decimals] = Number(price).toFixed(2).split(".");
-    return {
-      whole: whole.padStart(2, "0"),
-      decimals,
-    };
-  };
+  const getWholePrice = (price) => String(Math.trunc(Number(price)));
 
   const renderPrice = (price) => {
-    const { whole, decimals } = getPriceParts(price);
+    const whole = getWholePrice(price);
 
     return (
       <>
         <span className="event-money-whole">{whole}</span>
-        <span className="event-money-decimals">.{decimals}</span>
-        <span className="event-money-currency"> DKK</span>
+        <span className="event-money-currency"> kr.</span>
       </>
     );
   };

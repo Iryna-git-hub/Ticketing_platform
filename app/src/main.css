@@ -219,6 +219,9 @@ footer {
   font-size: 0.7em;
 }
 
+.event-money-currency {
+  font-size: 1em;
+}
 .event-price-row .event-money-whole {
   font-size: 1.15rem;
 }
@@ -226,4 +229,8 @@ footer {
 .event-price-row .event-money-decimals,
 .event-price-row .event-money-currency {
   font-size: 0.8em;
+}
+
+.event-price-row .event-money-currency {
+  font-size: 1.15rem;
 }
