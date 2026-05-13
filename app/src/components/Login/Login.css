@@ -1,12 +1,4 @@
 .login-panel {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-}
-
-.login-panel .panel-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,7 +7,7 @@
     padding: 24px;
 }
 
-.login-panel .panel-card:hover {
+.login-panel:hover {
     border-color: var(--panel-card-border);
 }
 

@@ -5,8 +5,8 @@ import Layout from "./components/Layout/Layout.jsx";
 import HomePage from "./components/HomePage/HomePage.jsx";
 import EventsPage from "./components/EventsPage/EventsPage.jsx";
 import EventDetail from "./components/EventDetail/EventDetail.jsx";
-import Login from "./components/Login/Login.jsx";
-import Register from "./components/Register/Register.jsx";
+import LoginPage from "./components/LoginPage/LoginPage.jsx";
+import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import "./main.css";
 // Cart model: cart items are stored in localStorage via CartContext (no backend needed).
@@ -21,11 +21,10 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "events", element: <EventsPage /> },
       { path: "events/:id", element: <EventDetail /> },
-
+      { path: "login", element: <LoginPage /> },
+      { path: "register", element: <RegisterPage /> },
     ],
   },
-  { path: "/login", element: <Login /> },
-  { path: "/register", element: <Register /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
