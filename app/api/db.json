@@ -1,5 +1,16 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "ena@emao.jhg",
+      "password": "$2a$10$b/vDeCxq0SnK68g9.PhsyOrtmp5b2TU950yqrQ.fdkyfbdrT91Ql2",
+      "id": 1
+    },
+    {
+      "email": "clara@mail.com",
+      "password": "$2a$10$EhI1rY4r67B9DbA9HlMlF.HZvrPk5u5HuuDfja4snl5q3xDFQiFiG",
+      "id": 2
+    }
+  ],
   "events": [
     {
       "id": 1,
@@ -120,6 +131,136 @@
     },
     {
       "id": 10,
+      "name": "Cybersecurity for Web Developers",
+      "date": "2026-06-28",
+      "time": "13:00",
+      "venue": "Incuba Science Park",
+      "city": "Aarhus",
+      "description": "Understand the OWASP Top 10, common web vulnerabilities, and how to defend against them in your own applications. Includes live demonstrations of XSS, CSRF, SQL injection, and secure authentication patterns.",
+      "price": 69,
+      "ticketsAvailable": 55,
+      "totalTickets": 80,
+      "category": "Workshop"
+    },
+    {
+      "id": 11,
+      "name": "Frontend Performance Optimization",
+      "date": "2026-06-05",
+      "time": "10:00",
+      "venue": "Matrikel1",
+      "city": "Copenhagen",
+      "description": "Learn practical techniques for improving Core Web Vitals, reducing JavaScript bundle size, optimizing images, and making modern web apps feel faster on real devices and slower networks.",
+      "price": 75,
+      "ticketsAvailable": 42,
+      "totalTickets": 60,
+      "category": "Workshop"
+    },
+    {
+      "id": 12,
+      "name": "React Patterns for Scalable Applications",
+      "date": "2026-06-09",
+      "time": "17:30",
+      "venue": "Dokk1",
+      "city": "Aarhus",
+      "description": "Explore practical React architecture patterns, component composition, state management trade-offs, reusable hooks, and strategies for keeping large frontend codebases maintainable.",
+      "price": 89,
+      "ticketsAvailable": 68,
+      "totalTickets": 100,
+      "category": "Workshop"
+    },
+    {
+      "id": 13,
+      "name": "UX Writing for Digital Products",
+      "date": "2026-06-12",
+      "time": "14:00",
+      "venue": "Odense Coworking",
+      "city": "Odense",
+      "description": "Improve product interfaces with clearer microcopy, better error messages, stronger calls to action, and user-focused content patterns for forms, onboarding, and checkout flows.",
+      "price": 49,
+      "ticketsAvailable": 31,
+      "totalTickets": 50,
+      "category": "Seminar"
+    },
+    {
+      "id": 14,
+      "name": "Building Accessible Web Interfaces",
+      "date": "2026-06-16",
+      "time": "09:30",
+      "venue": "IT University of Copenhagen",
+      "city": "Copenhagen",
+      "description": "Learn how to build inclusive interfaces with semantic HTML, keyboard navigation, ARIA best practices, color contrast checks, and practical accessibility testing workflows.",
+      "price": 65,
+      "ticketsAvailable": 54,
+      "totalTickets": 75,
+      "category": "Workshop"
+    },
+    {
+      "id": 15,
+      "name": "Node.js API Development Bootcamp",
+      "date": "2026-06-18",
+      "time": "11:00",
+      "venue": "The Kitchen AU",
+      "city": "Aarhus",
+      "description": "Build a production-ready REST API with Node.js, Express, authentication, validation, database integration, structured error handling, and deployment-ready project organization.",
+      "price": 95,
+      "ticketsAvailable": 47,
+      "totalTickets": 70,
+      "category": "Bootcamp"
+    },
+    {
+      "id": 16,
+      "name": "Design Systems in Practice",
+      "date": "2026-06-21",
+      "time": "13:00",
+      "venue": "Copenhagen FinTech Lab",
+      "city": "Copenhagen",
+      "description": "Understand how to create, document, and maintain a design system with reusable components, design tokens, accessibility standards, and collaboration between designers and developers.",
+      "price": 79,
+      "ticketsAvailable": 39,
+      "totalTickets": 60,
+      "category": "Workshop"
+    },
+    {
+      "id": 17,
+      "name": "Intro to TypeScript for JavaScript Developers",
+      "date": "2026-06-23",
+      "time": "16:00",
+      "venue": "UCL Erhvervsakademi",
+      "city": "Odense",
+      "description": "Get comfortable with TypeScript fundamentals, type annotations, interfaces, generics, narrowing, and how to gradually add type safety to existing JavaScript projects.",
+      "price": 59,
+      "ticketsAvailable": 73,
+      "totalTickets": 90,
+      "category": "Course"
+    },
+    {
+      "id": 18,
+      "name": "AI Tools for Product Teams",
+      "date": "2026-06-25",
+      "time": "15:30",
+      "venue": "BLOXHUB",
+      "city": "Copenhagen",
+      "description": "Discover how product managers, designers, and developers can use AI tools for research synthesis, prototyping, user story generation, testing workflows, and faster product discovery.",
+      "price": 69,
+      "ticketsAvailable": 88,
+      "totalTickets": 120,
+      "category": "Seminar"
+    },
+    {
+      "id": 19,
+      "name": "Cloud Deployment with Docker",
+      "date": "2026-06-27",
+      "time": "10:30",
+      "venue": "Aalborg University Innovation",
+      "city": "Aalborg",
+      "description": "Learn how to containerize web applications with Docker, configure environment variables, write Dockerfiles, manage images, and deploy services to a modern cloud platform.",
+      "price": 85,
+      "ticketsAvailable": 36,
+      "totalTickets": 55,
+      "category": "Workshop"
+    },
+    {
+      "id": 20,
       "name": "Cybersecurity for Web Developers",
       "date": "2026-06-28",
       "time": "13:00",

@@ -11,13 +11,25 @@ body,
   width: 100%;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 :root {
-  --bg: #fcf9f2;
-  --primary-color: #ff3962;
+  --bg: #f7f3ea;
+  --primary-color: #e55f37;
   --secondary-color: #513e3e;
+  --tertiary-color: #fff1ed;
   --disabled-color: #b1a7a5;
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --radius-8: 8px;
+  --panel-card-border: #eadfd8;
+  --panel-card-hover-border: color-mix(
+    in srgb,
+    var(--secondary-color) 35%,
+    #eadfd8
+  );
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
   --content-width: 1200px;
 }
 
@@ -26,14 +38,33 @@ body {
   font-family: var(--font-body);
 }
 
-h1, h2, h3, h4, h5 {
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: var(--font-heading);
 }
+
+h2 {
+  font-size: 1.25rem;
+} 
 
 .app-shell {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+header,
+main,
+footer {
+  padding: 0 24px;
 }
 
 .site-nav {
@@ -56,7 +87,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .logo {
-  padding: 20px;
+  padding: 20px 20px 20px 0;
 }
 
 .nav-link {
@@ -77,13 +108,36 @@ h1, h2, h3, h4, h5 {
   color: color-mix(in srgb, var(--secondary-color) 65%, white);
 }
 
+.nav-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  padding: 8px 16px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 20px;
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.2s ease;
+}
+
+.nav-action:focus-visible {
+  outline: 3px solid #ffd2dc;
+  outline-offset: 3px;
+}
+
 .app-main {
   flex: 1;
 }
 
 .site-footer {
   text-align: center;
-  padding: 16px 20px;
+  padding: 16px 24px;
 }
 
 .content-width {
@@ -97,7 +151,7 @@ h1, h2, h3, h4, h5 {
   width: fit-content;
   padding: 7px 10px;
   border-radius: 20px;
-  background-color: #ffe8ee;
+  background-color: var(--tertiary-color);
   color: var(--primary-color);
   font-size: 0.72rem;
   font-weight: 700;
@@ -105,9 +159,18 @@ h1, h2, h3, h4, h5 {
 }
 
 .panel-card {
-  border: 1px solid #eadfd8;
-  border-radius: 20px;
-  background-color: #fffdfa;
+  border: 2px solid var(--panel-card-border);
+  border-radius: 10px;
+  background-color: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.panel-card:hover {
+  border-color: var(--panel-card-hover-border);
+}
+
+.events-toolbar.panel-card:hover {
+  border-color: var(--panel-card-border);
 }
 
 .ticket-divider {
@@ -162,7 +225,7 @@ h1, h2, h3, h4, h5 {
 @media (min-width: 700px) {
   .site-nav {
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 10px 0;
   }
 
   .site-nav-left,
@@ -173,4 +236,29 @@ h1, h2, h3, h4, h5 {
   .nav-link {
     min-width: 90px;
   }
+}
+
+.event-money-whole {
+  font-size: 1em;
+}
+
+.event-money-decimals,
+.event-money-currency {
+  font-size: 0.7em;
+}
+
+.event-money-currency {
+  font-size: 1em;
+}
+.event-price-row .event-money-whole {
+  font-size: 1.15rem;
+}
+
+.event-price-row .event-money-decimals,
+.event-price-row .event-money-currency {
+  font-size: 0.8em;
+}
+
+.event-price-row .event-money-currency {
+  font-size: 1.15rem;
 }

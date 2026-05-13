@@ -1,8 +1,6 @@
 import EventCard from "../EventCard/EventCard.jsx";
 import "./EventList.css";
 
-// TODO: replace the mock data import with a fetch call to GET /events
-
 export default function EventList({ events }) {
   if (events.length === 0) {
     return (

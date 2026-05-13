@@ -15,7 +15,7 @@ export default function Layout() {
                 src={GoEventLogo}
                 alt="GoEvent logo"
                 className="logo"
-                width={130}
+                width={100}
               />
             </a>
             <Link to="/events" className="nav-link nav-link-primary">
@@ -24,15 +24,23 @@ export default function Layout() {
           </div>
 
           <div className="site-nav-right">
-            {user && (
+            {user ? (
               <>
                 <span>{user.email}</span>
-                <button onClick={logout}>Sign out</button>
+                <button className="nav-action secondary-button" onClick={logout}>
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="nav-action primary-button">
+                  Login
+                </Link>
+                <Link to="/register" className="nav-action secondary-button">
+                  Register
+                </Link>
               </>
             )}
-
-            <Link to="/login" className="nav-link nav-link-light">Login</Link>
-            <Link to="/register" className="nav-link nav-link-light">Register</Link>
           </div>
         </nav>
       </header>
@@ -42,7 +50,7 @@ export default function Layout() {
       </main>
 
       <footer className="site-footer content-width">
-        &copy;GoEvent
+        Copyright &copy; 2026 GoEvent
       </footer>
     </div>
   );
