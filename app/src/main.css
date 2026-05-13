@@ -108,6 +108,29 @@ footer {
   color: color-mix(in srgb, var(--secondary-color) 65%, white);
 }
 
+.nav-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  padding: 8px 16px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 20px;
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.2s ease;
+}
+
+.nav-action:focus-visible {
+  outline: 3px solid #ffd2dc;
+  outline-offset: 3px;
+}
+
 .app-main {
   flex: 1;
 }

@@ -4,6 +4,11 @@
       "email": "ena@emao.jhg",
       "password": "$2a$10$b/vDeCxq0SnK68g9.PhsyOrtmp5b2TU950yqrQ.fdkyfbdrT91Ql2",
       "id": 1
+    },
+    {
+      "email": "clara@mail.com",
+      "password": "$2a$10$EhI1rY4r67B9DbA9HlMlF.HZvrPk5u5HuuDfja4snl5q3xDFQiFiG",
+      "id": 2
     }
   ],
   "events": [
