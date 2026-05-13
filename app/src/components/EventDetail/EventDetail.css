@@ -13,28 +13,25 @@
 }
 
 .event-detail-back-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  border: 1px solid var(--panel-card-hover-border);
-  border-radius: 7px;
-  background-color: #fff;
-  color: var(--secondary-color);
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 10px 14px;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border: 1px solid var(--panel-card-border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--primary-color);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 .event-detail-back-link:hover {
   border-color: var(--primary-color);
-  background-color: #fff;
+  background-color: var(--tertiary-color);
 }
 
 .event-detail-back-link:focus-visible {
@@ -43,8 +40,15 @@
 }
 
 .event-detail-back-link::before {
-  content: "<-";
+  content: "⟵";
   line-height: 1;
+  padding: 0 10px;
+  transition: 0.2s ease;
+}
+
+.event-detail-back-link:hover.event-detail-back-link::before {
+  padding-left: 0;
+
 }
 
 .event-detail-card {
@@ -225,6 +229,7 @@
   font-size: 1.3rem;
   line-height: 1;
   font-weight: 700;
+  transition: 0.2s ease;
 }
 
 .event-ticket-stepper-button:hover:not(:disabled) {
