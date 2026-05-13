@@ -57,7 +57,7 @@
 .events-toolbar-field select {
   width: 100%;
   border: 1px solid var(--panel-card-hover-border);
-  border-radius: 7px;
+  border-radius: var(--radius-8);
   background-color: #fff;
   color: var(--secondary-color);
   font: inherit;
@@ -95,7 +95,7 @@
   justify-content: space-between;
   gap: 12px;
   border: 1px solid var(--panel-card-hover-border);
-  border-radius: 7px;
+  border-radius: var(--radius-8);
   background-color: #fff;
   color: var(--secondary-color);
   cursor: pointer;
@@ -129,7 +129,7 @@
   max-width: min(90vw, 420px);
   z-index: 20;
   border: 1px solid #eadfd8;
-  border-radius: 8px;
+  border-radius: var(--radius-8);
   background: #fff;
   box-shadow: 0 10px 24px rgb(81 62 62 / 12%);
   list-style: none;
@@ -149,7 +149,7 @@
 .events-sort-option {
   width: 100%;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-8);
   background: transparent;
   color: var(--secondary-color);
   cursor: pointer;

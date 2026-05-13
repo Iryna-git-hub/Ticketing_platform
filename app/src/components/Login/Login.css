@@ -1,0 +1,104 @@
+.login-panel {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.login-panel .panel-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+}
+
+.login-panel .panel-card:hover {
+    border-color: var(--panel-card-border);
+}
+
+.login-panel form {
+    display: grid;
+    gap: 24px;
+    width: 100%;
+    margin: 16px 0 32px;
+}
+
+.login-panel form > div {
+    display: grid;
+    gap: 8px;
+}
+
+.login-panel label {
+    color: var(--secondary-color);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.login-panel input {
+    width: 100%;
+    border: 1px solid var(--panel-card-hover-border);
+    border-radius: var(--radius-8);
+    background-color: #fff;
+    color: var(--secondary-color);
+    font: inherit;
+    padding: 12px 14px;
+}
+
+.login-panel input:hover {
+    border-color: var(--primary-color);
+    background-color: #fff;
+}
+
+.login-panel input:active,
+.login-panel input:focus-visible {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgb(255 57 98 / 12%);
+}
+
+.login-panel input::placeholder {
+    color: color-mix(in srgb, var(--disabled-color) 70%, white);
+}
+
+.login-panel input[aria-invalid="true"] {
+    border-color: var(--primary-color);
+}
+
+.login-field-error {
+    color: red;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.login-panel button[type="submit"] {
+    width: auto;
+    border: 1px solid var(--secondary-color);
+    border-radius: 50px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    justify-self: center;
+    padding: 12px 40px;
+    text-transform: uppercase;
+    transition: 0.2s ease;
+}
+
+.login-panel button[type="submit"]:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+}
+
+.login-panel button[type="submit"]:disabled {
+    border-color: var(--disabled-color);
+    background-color: var(--disabled-color);
+    color: #fff;
+    cursor: not-allowed;
+}

@@ -59,11 +59,8 @@ export default function EventDetail() {
   }
 
   const isSoldOut = event.ticketsAvailable === 0;
-  const getWholePrice = (price) => String(Math.trunc(Number(price)));
 
   const renderPrice = (price) => {
-    
-
     return (
       <>
         <span className="event-money-whole">{price}</span>
@@ -108,8 +105,6 @@ export default function EventDetail() {
 
   return (
     <section className="event-detail-page content-width">
-      
-
       <article className="event-detail-card panel-card">
         <span className="category-badge">{event.category}</span>
 
@@ -147,8 +142,6 @@ export default function EventDetail() {
 
             {!isSoldOut && (
               <div className="event-ticket-quantity-group">
-                
-
                 <div className="event-ticket-stepper">
                   <button
                     type="button"

@@ -16,9 +16,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 14px;
+    padding: 14px 16px;
     border: 1px solid var(--panel-card-border);
-    border-radius: 8px;
+    border-radius: var(--radius-8);
     background: #fff;
     color: var(--primary-color);
     font-size: 0.75rem;
@@ -189,7 +189,7 @@
   align-items: center;
   gap: 0;
   border: 1px solid var(--panel-card-hover-border);
-  border-radius: 7px;
+  border-radius: var(--radius-8);
   background-color: #fff;
   padding: 0;
   overflow: hidden;
@@ -260,7 +260,7 @@
   color: var(--secondary-color);
   font-weight: 700;
   padding: 16px;
-  border-radius: 8px;
+  border-radius: var(--radius-8);
 }
 
 .event-ticket-total-value {
