@@ -76,6 +76,12 @@ export default function EventCard({ event }) {
         </p>
 
         <div className="event-card-actions">
+          <Link
+            className="event-card-link secondary-button"
+            to={`/events/${event.id}`}
+          >
+            View details
+          </Link>
           {event.ticketsAvailable === 0 ? (
             <button className="event-card-link primary-button" disabled>
               Buy ticket
@@ -88,12 +94,7 @@ export default function EventCard({ event }) {
               Buy ticket
             </Link>
           )}
-          <Link
-            className="event-card-link secondary-button"
-            to={`/events/${event.id}`}
-          >
-            View details
-          </Link>
+          
         </div>
       </div>
     </li>
