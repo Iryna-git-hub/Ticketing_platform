@@ -62,11 +62,11 @@ export default function EventDetail() {
   const getWholePrice = (price) => String(Math.trunc(Number(price)));
 
   const renderPrice = (price) => {
-    const whole = getWholePrice(price);
+    
 
     return (
       <>
-        <span className="event-money-whole">{whole}</span>
+        <span className="event-money-whole">{price}</span>
         <span className="event-money-currency"> kr.</span>
       </>
     );
@@ -108,11 +108,7 @@ export default function EventDetail() {
 
   return (
     <section className="event-detail-page content-width">
-      <div className="event-detail-back">
-        <Link to="/events" className="event-detail-back-link">
-          Back to events
-        </Link>
-      </div>
+      
 
       <article className="event-detail-card panel-card">
         <span className="category-badge">{event.category}</span>
@@ -239,6 +235,11 @@ export default function EventDetail() {
           </div>
         )}
       </article>
+      <div className="event-detail-back">
+        <Link to="/events" className="event-detail-back-link">
+          Back to events
+        </Link>
+      </div>
     </section>
   );
 }
