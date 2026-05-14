@@ -27,6 +27,7 @@
   display: grid;
   width: min(100%, 520px);
   gap: 14px;
+  justify-items: center;
   padding: 28px 24px;
   text-align: center;
 }
@@ -39,6 +40,11 @@
 .cart-card p {
   color: var(--secondary-color);
   line-height: 1.5;
+}
+
+.cart-empty-button {
+  font-size: 0.75rem;
+  padding: 10px 18px;
 }
 
 .cart-table {

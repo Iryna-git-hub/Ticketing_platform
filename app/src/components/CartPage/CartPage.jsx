@@ -15,8 +15,8 @@ export default function CartPage() {
         <div className="cart-card panel-card">
           <h1>Event Cart</h1>
           <p>Your cart is empty.</p>
-          <Link to="/events" className="cart-back-link">
-            Back to Events
+          <Link to="/events" className="cart-empty-button event-detail-button secondary-button">
+            Find more events
           </Link>
         </div>
       </section>
