@@ -20,10 +20,10 @@ export default function CheckoutPage() {
 
   if (!user) {
     return (
-      <section className="content-width panel-card">
+      <section className="checkout-empty content-width panel-card">
         <h1>Login required</h1>
         <p>You must be logged in to checkout.</p>
-        <Link to="/login" className="primary-button">
+        <Link to="/login" className="checkout-button primary-button">
           Login
         </Link>
       </section>
@@ -31,10 +31,26 @@ export default function CheckoutPage() {
   }
 
   return (
-    <section className="content-width panel-card">
-      <h1>Checkout</h1>
-      <p>Total: {totalPrice === 0 ? "0 kr." : `${totalPrice} kr.`}</p>
-      <button type="button">Place order</button>
+    <section className="checkout-page content-width">
+      <div className="checkout-header">
+        <h1>Checkout</h1>
+      </div>
+
+      <div className="checkout-panel panel-card">
+        <div className="checkout-summary-box">
+          <span>Total</span>
+          <strong>{totalPrice === 0 ? "0 kr." : `${totalPrice} kr.`}</strong>
+        </div>
+
+        <div className="checkout-actions">
+          <Link to="/cart" className="checkout-empty-link">
+            Edit cart
+          </Link>
+          <button type="button" className="checkout-button primary-button">
+            Place order
+          </button>
+        </div>
+      </div>
     </section>
   );
 }
