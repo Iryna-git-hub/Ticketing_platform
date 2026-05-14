@@ -7,6 +7,7 @@ import {
   MapPinIcon,
 } from "../EventIcons/EventIcons.jsx";
 import "./EventDetail.css";
+import { useCart } from "../../context/CartContext.jsx";
 
 export default function EventDetail() {
   const { id } = useParams();
@@ -14,6 +15,8 @@ export default function EventDetail() {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { addItem } = useCart();
+  const [cartMessage, setCartMessage] = useState("");
 
   useEffect(() => {
     async function fetchEvent() {
@@ -102,6 +105,11 @@ export default function EventDetail() {
   };
 
   const totalPrice = event.price * quantity;
+
+  function handlerAddToCart() {
+    addItem(event, quantity);
+    setCartMessage("Added to cart.");
+  }
 
   return (
     <section className="event-detail-page content-width">
@@ -206,11 +214,13 @@ export default function EventDetail() {
             </p>
 
             <div className="event-ticket-purchase-row">
+              {cartMessage && <p>{cartMessage}</p>}
               <button
                 type="button"
                 className="event-detail-button primary-button"
+                onClick={handlerAddToCart}
               >
-                Buy ticket
+                Add to cart
               </button>
             </div>
           </div>
