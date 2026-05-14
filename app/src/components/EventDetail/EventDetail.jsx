@@ -1,5 +1,5 @@
-import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import api from "../../api.js";
 import {
   CalendarIcon,
@@ -11,12 +11,14 @@ import { useCart } from "../../context/CartContext.jsx";
 
 export default function EventDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { addItem } = useCart();
-  const [cartMessage, setCartMessage] = useState("");
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     async function fetchEvent() {
@@ -44,6 +46,47 @@ export default function EventDetail() {
     }
     fetchEvent();
   }, [id]);
+
+  useEffect(() => {
+    if (!isCartModalOpen) {
+      return;
+    }
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+    const focusableElements = Array.from(
+      modalRef.current?.querySelectorAll(focusableSelector) || [],
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    firstElement?.focus();
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        setIsCartModalOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab" || focusableElements.length === 0) {
+        return;
+      }
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isCartModalOpen]);
 
   if (loading) {
     return <p className="event-detail-not-found">Loading event...</p>;
@@ -108,7 +151,7 @@ export default function EventDetail() {
 
   function handlerAddToCart() {
     addItem(event, quantity);
-    setCartMessage("Added to cart.");
+    setIsCartModalOpen(true);
   }
 
   return (
@@ -214,7 +257,6 @@ export default function EventDetail() {
             </p>
 
             <div className="event-ticket-purchase-row">
-              {cartMessage && <p>{cartMessage}</p>}
               <button
                 type="button"
                 className="event-detail-button primary-button"
@@ -243,6 +285,66 @@ export default function EventDetail() {
           Back to events
         </Link>
       </div>
+
+      {isCartModalOpen && (
+        <div
+          className="ticket-modal-backdrop"
+          onMouseDown={(modalEvent) => {
+            if (modalEvent.target === modalEvent.currentTarget) {
+              setIsCartModalOpen(false);
+            }
+          }}
+        >
+          <div
+            className="ticket-modal panel-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="ticket-modal-title"
+            ref={modalRef}
+          >
+            <button
+              type="button"
+              className="ticket-modal-close"
+              onClick={() => setIsCartModalOpen(false)}
+              aria-label="Close ticket confirmation"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                aria-hidden="true"
+              >
+                <path d="M6 6l12 12" />
+                <path d="M18 6L6 18" />
+              </svg>
+            </button>
+
+            <div className="ticket-modal-copy">
+              <h2 id="ticket-modal-title">Ticket added to cart</h2>
+              <p>Your ticket selection is saved in your cart.</p>
+            </div>
+
+            <div className="ticket-modal-actions">
+              <button
+                type="button"
+                className="event-detail-button secondary-button"
+                onClick={() => setIsCartModalOpen(false)}
+              >
+                Find more events
+              </button>
+              <button
+                type="button"
+                className="event-detail-button primary-button"
+                onClick={() => navigate("/cart")}
+              >
+                View cart
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
