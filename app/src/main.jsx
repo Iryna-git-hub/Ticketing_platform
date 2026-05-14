@@ -10,7 +10,7 @@ import RegisterPage from "./components/RegisterPage/RegisterPage.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import "./main.css";
 import { CartProvider } from "./context/CartContext.jsx";
-import CartPage from "./components/CartPage/CartPage.jsx"
+import CartPage from "./components/CartPage/CartPage.jsx";
 // Cart model: cart items are stored in localStorage via CartContext (no backend needed).
 // At checkout, the cart is POSTed to POST /api/orders and then cleared.
 // CartContext should follow the same pattern as AuthContext — see that file for reference.

@@ -60,8 +60,12 @@ function clearCart() {
   setItems([]);
 }
 
-const totalQuantity = useMemo(() => {
+const totalPrice = useMemo(() => {
   return items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}, [items]);
+
+const totalQuantity = useMemo(() => {
+  return items.reduce((sum, item) => sum + item.quantity, 0);
 }, [items]);
 
 return (
