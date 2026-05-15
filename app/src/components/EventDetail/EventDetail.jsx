@@ -31,7 +31,7 @@ export default function EventDetail() {
           throw new Error("Event not found.");
         }
 
-        if (!response) {
+        if (!response.ok) {
           throw new Error("Could not load event details.");
         }
 

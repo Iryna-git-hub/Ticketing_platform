@@ -7,17 +7,6 @@ export default function CheckoutPage() {
   const { user } = useAuth();
   const { items, totalPrice } = useCart();
 
-  if (items.length === 0) {
-    return (
-      <section className="checkout-empty content-width panel-card">
-        <h1>Your cart is empty</h1>
-        <Link to="/events" className="checkout-empty-link">
-          Find more events
-        </Link>
-      </section>
-    );
-  }
-
   if (!user) {
     return (
       <section className="checkout-empty content-width panel-card">
