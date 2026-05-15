@@ -1,0 +1,139 @@
+.checkout-empty {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  margin-top: 24px;
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.checkout-empty:hover {
+  border-color: var(--panel-card-border);
+}
+
+.checkout-empty h1 {
+  color: var(--secondary-color);
+}
+
+.checkout-empty p {
+  color: var(--secondary-color);
+  line-height: 1.5;
+}
+
+.checkout-page {
+  display: grid;
+  gap: 20px;
+  padding: 24px 0;
+}
+
+.checkout-header h1 {
+  color: var(--secondary-color);
+  font-size: 1.55rem;
+  line-height: 1.2;
+}
+
+.checkout-panel {
+  display: grid;
+  overflow: hidden;
+  padding: 0;
+}
+
+.checkout-panel:hover {
+  border-color: var(--panel-card-border);
+}
+
+.checkout-summary-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px;
+  background-color: #faf8f6;
+  color: var(--secondary-color);
+  font-weight: 800;
+}
+
+.checkout-summary-box strong {
+  font-size: 1.2rem;
+}
+
+.checkout-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px;
+}
+
+.checkout-button,
+.checkout-empty-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.2s ease;
+}
+
+.checkout-button {
+  border: 1px solid var(--secondary-color);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  padding: 12px 22px;
+}
+
+.checkout-empty-link {
+  padding: 14px 16px;
+  border: 1px solid var(--panel-card-border);
+  border-radius: var(--radius-8);
+  background: #fff;
+  color: var(--primary-color);
+  font-size: 0.75rem;
+}
+
+.checkout-empty-link:hover {
+  border-color: var(--primary-color);
+  background-color: var(--tertiary-color);
+}
+
+.checkout-empty-link::before {
+  content: "←";
+  line-height: 1;
+  padding: 0 10px 0 0;
+  transition: 0.2s ease;
+}
+
+.checkout-empty-link:hover::before {
+  padding-right: 6px;
+}
+
+@media (max-width: 520px) {
+  .checkout-page {
+    padding: 20px 0;
+  }
+
+  .checkout-actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+  .checkout-button,
+  .checkout-empty-link {
+    width: 100%;
+  }
+}
+
+@media (min-width: 760px) {
+  .checkout-page {
+    padding: 32px 0;
+  }
+
+  .checkout-header h1 {
+    font-size: 1.7rem;
+  }
+}

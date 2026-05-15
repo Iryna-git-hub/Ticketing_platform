@@ -7,6 +7,8 @@ import {
   MapPinIcon,
 } from "../EventIcons/EventIcons.jsx";
 import "./EventDetail.css";
+import { useCart } from "../../context/CartContext.jsx";
+import TicketAddedModal from "../TicketAddedModal/TicketAddedModal.jsx";
 
 export default function EventDetail() {
   const { id } = useParams();
@@ -14,6 +16,8 @@ export default function EventDetail() {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { addItem } = useCart();
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchEvent() {
@@ -27,7 +31,7 @@ export default function EventDetail() {
           throw new Error("Event not found.");
         }
 
-        if (!response) {
+        if (!response.ok) {
           throw new Error("Could not load event details.");
         }
 
@@ -102,6 +106,11 @@ export default function EventDetail() {
   };
 
   const totalPrice = event.price * quantity;
+
+  function handlerAddToCart() {
+    addItem(event, quantity);
+    setIsCartModalOpen(true);
+  }
 
   return (
     <section className="event-detail-page content-width">
@@ -209,8 +218,9 @@ export default function EventDetail() {
               <button
                 type="button"
                 className="event-detail-button primary-button"
+                onClick={handlerAddToCart}
               >
-                Buy ticket
+                Add to cart
               </button>
             </div>
           </div>
@@ -233,6 +243,11 @@ export default function EventDetail() {
           Back to events
         </Link>
       </div>
+
+      <TicketAddedModal
+        isOpen={isCartModalOpen}
+        onClose={() => setIsCartModalOpen(false)}
+      />
     </section>
   );
 }

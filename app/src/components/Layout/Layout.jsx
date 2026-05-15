@@ -1,9 +1,12 @@
 import { Link, Outlet } from "react-router-dom";
 import GoEventLogo from "../../assets/GoEvent_logo.png";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { useCart } from "../../context/CartContext.jsx";
+import { CartIcon } from "../EventIcons/EventIcons.jsx";
 
 export default function Layout() {
   const { user, logout } = useAuth();
+  const { totalQuantity } = useCart();
 
   return (
     <div className="app-shell">
@@ -27,6 +30,10 @@ export default function Layout() {
             {user ? (
               <>
                 <span>{user.email}</span>
+                <Link to="/cart" className="nav-cart-link" aria-label={`Cart with ${totalQuantity} items`}>
+                  <CartIcon />
+                  <span className="nav-cart-count">{totalQuantity}</span>
+                </Link>
                 <button className="nav-action secondary-button" onClick={logout}>
                   Sign out
                 </button>
