@@ -12,9 +12,8 @@ import "./main.css";
 import { CartProvider } from "./context/CartContext.jsx";
 import CartPage from "./components/CartPage/CartPage.jsx";
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage.jsx";
-
-// At checkout, the cart is POSTed to POST /api/orders and then cleared.
-// CartContext should follow the same pattern as AuthContext — see that file for reference.
+import OrdersPage from "./components/OrdersPage/OrdersPage.jsx";
+import OrderDetailPage from "./components/OrderDetailPage/OrderDetailPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +27,8 @@ const router = createBrowserRouter([
       { path: "register", element: <RegisterPage /> },
       { path: "cart", element: <CartPage /> },
       { path: "checkout", element: <CheckoutPage /> },
+      { path: "orders", element: <OrdersPage /> },
+      { path: "orders/:id", element: <OrderDetailPage /> },
     ],
   },
 ]);
