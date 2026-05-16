@@ -17,7 +17,12 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const isFormValid = fullName.trim() && email.trim() && paymentMethod;
+  const isFormValid =
+    fullName.trim() &&
+    email.trim().includes("@") &&
+    paymentMethod &&
+    items.length > 0 &&
+    user;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -67,6 +72,10 @@ export default function CheckoutPage() {
               </p>
               {showErrors && !email.trim() && (
                 <p className="checkout-error">Email is required.</p>
+              )}
+              
+              {showErrors && email.trim() && !email.includes("@") && (
+                <p className="checkout-error">Enter a valid email address.</p>
               )}
             </label>
 
