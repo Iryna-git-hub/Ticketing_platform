@@ -273,5 +273,40 @@
       "category": "Workshop"
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "userId": 2,
+      "customer": {
+        "fullName": "clara",
+        "email": "clara@mail.com",
+        "phoneNumber": ""
+      },
+      "paymentMethod": "card",
+      "items": [
+        {
+          "id": 3,
+          "name": "JavaScript: Modern Patterns Workshop",
+          "date": "2026-05-03",
+          "time": "10:00",
+          "venue": "Founders House",
+          "city": "Copenhagen",
+          "price": 79,
+          "quantity": 4
+        },
+        {
+          "id": 4,
+          "name": "TypeScript Deep Dive",
+          "date": "2026-05-10",
+          "time": "10:00",
+          "venue": "IDA Conference Centre",
+          "city": "Copenhagen",
+          "price": 89,
+          "quantity": 3
+        }
+      ],
+      "totalPrice": 583,
+      "createdAt": "2026-05-16T14:59:25.277Z",
+      "id": 1
+    }
+  ]
 }

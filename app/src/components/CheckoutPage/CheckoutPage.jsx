@@ -1,9 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import api from "../../api";
 import { useCart } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthContext";
 import "./CheckoutPage.css";
+
+function getOrderErrorMessage(status) {
+  if (status === 401) {
+    return "Your login session expired. Please log in again.";
+  }
+
+  if (status === 403) {
+    return "You do not have permission to place this order.";
+  }
+
+  if (status >= 500) {
+    return "The server had a problem. Please try again later.";
+  }
+
+  return "Could not place your order. Please try again.";
+}
 
 export default function CheckoutPage() {
   const navigate = useNavigate();
@@ -22,9 +38,10 @@ export default function CheckoutPage() {
     email.trim().includes("@") &&
     paymentMethod &&
     items.length > 0 &&
-    user;
+    user &&
+    token;
 
-  if (!user) {
+  if (!user || !token) {
     return (
       <section className="checkout-empty content-width panel-card">
         <h1>Login required</h1>
@@ -55,6 +72,7 @@ export default function CheckoutPage() {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
+          userId: user.id,
           customer: {
             fullName,
             email,
@@ -68,7 +86,7 @@ export default function CheckoutPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Could not place your order. Please try again.");
+        throw new Error(getOrderErrorMessage(response.status));
       }
 
       const order = await response.json();
