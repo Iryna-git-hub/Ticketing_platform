@@ -30,6 +30,7 @@ export default function Layout() {
             {user ? (
               <>
                 <span>{user.email}</span>
+                <Link to="/orders" className="nav-action secondary-button">Orders</Link>
                 <Link to="/cart" className="nav-cart-link" aria-label={`Cart with ${totalQuantity} items`}>
                   <CartIcon />
                   <span className="nav-cart-count">{totalQuantity}</span>
