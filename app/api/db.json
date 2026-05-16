@@ -405,6 +405,30 @@
       "totalPrice": 625,
       "createdAt": "2026-05-16T18:39:52.327Z",
       "id": 3
+    },
+    {
+      "userId": 2,
+      "customer": {
+        "fullName": "Olga",
+        "email": "clara@mail.com",
+        "phoneNumber": ""
+      },
+      "paymentMethod": "mobilePay",
+      "items": [
+        {
+          "id": 3,
+          "name": "JavaScript: Modern Patterns Workshop",
+          "date": "2026-05-03",
+          "time": "10:00",
+          "venue": "Founders House",
+          "city": "Copenhagen",
+          "price": 79,
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 79,
+      "createdAt": "2026-05-16T19:49:04.897Z",
+      "id": 4
     }
   ]
 }
