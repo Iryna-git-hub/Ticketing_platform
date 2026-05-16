@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import GoEventLogo from "../../assets/GoEvent_logo.png";
 import { useAuth } from "../../context/AuthContext.jsx";
@@ -6,10 +6,12 @@ import { useCart } from "../../context/CartContext.jsx";
 import { CartIcon, UserIcon } from "../EventIcons/EventIcons.jsx";
 
 export default function Layout() {
+  const { pathname } = useLocation();
   const { user, logout } = useAuth();
   const { totalQuantity } = useCart();
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const profileMenuRef = useRef(null);
+  const isHomePage = pathname === "/";
 
   const username =
     user?.username || user?.name || user?.email?.split("@")[0] || "there";
@@ -135,13 +137,15 @@ export default function Layout() {
         </nav>
       </header>
 
-      <main className="app-main">
+      <main className={`app-main ${isHomePage ? "app-main-home" : ""}`}>
         <Outlet />
       </main>
 
-      <footer className="site-footer content-width">
-        Copyright &copy; 2026 GoEvent
-      </footer>
+      {!isHomePage && (
+        <footer className="site-footer content-width">
+          Copyright &copy; 2026 GoEvent
+        </footer>
+      )}
     </div>
   );
 }

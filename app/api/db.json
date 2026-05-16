@@ -455,6 +455,30 @@
       "totalPrice": 158,
       "createdAt": "2026-05-16T21:23:26.595Z",
       "id": 5
+    },
+    {
+      "userId": 2,
+      "customer": {
+        "fullName": "Clara",
+        "email": "clara@mail.com",
+        "phoneNumber": "34 53 78 92"
+      },
+      "paymentMethod": "mobilePay",
+      "items": [
+        {
+          "id": 2,
+          "name": "Hackathon: Build with AI",
+          "date": "2026-04-25",
+          "time": "09:00",
+          "venue": "BLOX",
+          "city": "Copenhagen",
+          "price": 0,
+          "quantity": 3
+        }
+      ],
+      "totalPrice": 0,
+      "createdAt": "2026-05-16T23:00:19.542Z",
+      "id": 6
     }
   ]
 }

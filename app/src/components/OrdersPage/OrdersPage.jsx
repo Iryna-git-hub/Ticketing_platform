@@ -68,7 +68,11 @@ export default function OrdersPage() {
     );
   }
 
-  const visibleOrders = orders.filter((order) => !isCanceledOrder(order));
+  const visibleOrders = orders
+    .filter((order) => !isCanceledOrder(order))
+    .toSorted((firstOrder, secondOrder) => {
+      return new Date(secondOrder.createdAt) - new Date(firstOrder.createdAt);
+    });
 
   return (
     <section className="orders-page content-width">
