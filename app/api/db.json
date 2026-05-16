@@ -351,6 +351,60 @@
       "totalPrice": 243,
       "createdAt": "2026-05-16T15:11:35.264Z",
       "id": 2
+    },
+    {
+      "userId": 2,
+      "customer": {
+        "fullName": "clara",
+        "email": "clara@mail.com",
+        "phoneNumber": ""
+      },
+      "paymentMethod": "mobilePay",
+      "items": [
+        {
+          "id": 4,
+          "name": "TypeScript Deep Dive",
+          "date": "2026-05-10",
+          "time": "10:00",
+          "venue": "IDA Conference Centre",
+          "city": "Copenhagen",
+          "price": 89,
+          "quantity": 1
+        },
+        {
+          "id": 3,
+          "name": "JavaScript: Modern Patterns Workshop",
+          "date": "2026-05-03",
+          "time": "10:00",
+          "venue": "Founders House",
+          "city": "Copenhagen",
+          "price": 79,
+          "quantity": 3
+        },
+        {
+          "id": 7,
+          "name": "Open Source Summit Nordic",
+          "date": "2026-06-05",
+          "time": "09:00",
+          "venue": "Aarhus Congress Centre",
+          "city": "Aarhus",
+          "price": 299,
+          "quantity": 1
+        },
+        {
+          "id": 2,
+          "name": "Hackathon: Build with AI",
+          "date": "2026-04-25",
+          "time": "09:00",
+          "venue": "BLOX",
+          "city": "Copenhagen",
+          "price": 0,
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 625,
+      "createdAt": "2026-05-16T18:39:52.327Z",
+      "id": 3
     }
   ]
 }
