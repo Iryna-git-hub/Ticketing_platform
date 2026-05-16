@@ -306,7 +306,8 @@
       ],
       "totalPrice": 583,
       "createdAt": "2026-05-16T14:59:25.277Z",
-      "id": 1
+      "id": 1,
+      "status": "Canceled"
     },
     {
       "userId": 2,
@@ -350,7 +351,8 @@
       ],
       "totalPrice": 243,
       "createdAt": "2026-05-16T15:11:35.264Z",
-      "id": 2
+      "id": 2,
+      "status": "Canceled"
     },
     {
       "userId": 2,
@@ -429,6 +431,30 @@
       "totalPrice": 79,
       "createdAt": "2026-05-16T19:49:04.897Z",
       "id": 4
+    },
+    {
+      "userId": 2,
+      "customer": {
+        "fullName": "Clara",
+        "email": "clara@mail.com",
+        "phoneNumber": ""
+      },
+      "paymentMethod": "mobilePay",
+      "items": [
+        {
+          "id": 3,
+          "name": "JavaScript: Modern Patterns Workshop",
+          "date": "2026-05-03",
+          "time": "10:00",
+          "venue": "Founders House",
+          "city": "Copenhagen",
+          "price": 79,
+          "quantity": 2
+        }
+      ],
+      "totalPrice": 158,
+      "createdAt": "2026-05-16T21:23:26.595Z",
+      "id": 5
     }
   ]
 }

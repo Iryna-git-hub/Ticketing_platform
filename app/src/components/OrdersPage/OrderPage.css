@@ -26,10 +26,19 @@
   display: grid;
   overflow: hidden;
   padding: 0;
+  color: inherit;
+  text-decoration: none;
 }
 
-.order-card:hover {
-  border-color: var(--panel-card-border);
+.order-card:hover,
+.order-card:focus-visible {
+  border-color: var(--panel-card-hover-border);
+  outline: none;
+}
+
+.order-card:hover .order-events h3 {
+  font-size: 1.05rem;
+  transition: 0.2s ease;
 }
 
 .order-card-header,
@@ -115,10 +124,7 @@
   overflow-wrap: anywhere;
 }
 
-.order-events p {
-  display: flex;
-  align-items: center;
-  gap: 9px;
+.order-item-quantity {
   color: color-mix(in srgb, var(--secondary-color) 78%, white);
   font-size: 0.9rem;
   font-weight: 500;
@@ -135,8 +141,9 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 14px;
+  padding-block: 10px;
   background-color: #faf8f6;
 }
 
@@ -149,12 +156,12 @@
 
 .order-card-footer span {
   color: var(--secondary-color);
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 700;
 }
 
 .order-card-footer strong {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
 }
 
@@ -175,36 +182,6 @@
   text-decoration: none;
   text-transform: uppercase;
   transition: 0.2s ease;
-}
-
-.orders-back-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  padding: 14px 16px;
-  border: 1px solid var(--panel-card-border);
-  border-radius: var(--radius-8);
-  background: #fff;
-  color: var(--primary-color);
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: 0.2s ease;
-}
-
-.orders-back-link:hover {
-  border-color: var(--primary-color);
-  background-color: var(--tertiary-color);
-}
-
-.orders-back-link:focus-visible {
-  outline: 3px solid #ffd2dc;
-  outline-offset: 3px;
 }
 
 .orders-empty {
@@ -244,9 +221,6 @@
     width: 100%;
   }
 
-  .orders-back-link {
-    width: 100%;
-  }
 }
 
 @media (min-width: 760px) {

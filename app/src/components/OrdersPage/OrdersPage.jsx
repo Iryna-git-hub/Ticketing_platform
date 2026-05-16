@@ -12,6 +12,10 @@ function formatDate(date) {
   });
 }
 
+function isCanceledOrder(order) {
+  return ["canceled", "cancelled"].includes(order.status?.toLowerCase());
+}
+
 export default function OrdersPage() {
   const { user, token } = useAuth();
   const [orders, setOrders] = useState([]);
@@ -64,6 +68,8 @@ export default function OrdersPage() {
     );
   }
 
+  const visibleOrders = orders.filter((order) => !isCanceledOrder(order));
+
   return (
     <section className="orders-page content-width">
       <header className="orders-header">
@@ -82,7 +88,7 @@ export default function OrdersPage() {
         </div>
       )}
 
-      {!loading && !error && orders.length === 0 && (
+      {!loading && !error && visibleOrders.length === 0 && (
         <div className="orders-empty panel-card">
           <p>You have no orders yet.</p>
           <Link className="orders-button secondary-button" to="/events">
@@ -91,51 +97,54 @@ export default function OrdersPage() {
         </div>
       )}
 
-      {!loading && !error && orders.length > 0 && (
+      {!loading && !error && visibleOrders.length > 0 && (
         <ul className="orders-list">
-          {orders.map((order) => (
-            <li className="order-card panel-card" key={order.id}>
-              <div className="order-card-header">
-                <div className="order-card-main">
-                  <div className="order-title-row">
-                    <h2>Order #{order.id}</h2>
-                    <span className="order-status">
-                      {order.status || "Placed"}
-                    </span>
+          {visibleOrders.map((order) => (
+            <li key={order.id}>
+              <Link
+                className="order-card panel-card"
+                to={`/orders/${order.id}`}
+              >
+                <div className="order-card-header">
+                  <div className="order-card-main">
+                    <div className="order-title-row">
+                      <h2>Order #{order.id}</h2>
+                      <span className="order-status">
+                        {order.status || "Placed"}
+                      </span>
+                    </div>
                   </div>
+                  <p className="order-card-date">
+                    {formatDate(order.createdAt)}
+                  </p>
                 </div>
-                <p className="order-card-date">{formatDate(order.createdAt)}</p>
-              </div>
 
-              <div className="order-events">
-                <ul>
-                  {order.items.map((item) => (
-                    <li key={item.id}>
-                      <div>
-                        <h3>{item.name}</h3>
-                        <p>
-                          {item.quantity}{" "}
-                          {item.quantity === 1 ? "ticket" : "tickets"}
-                        </p>
-                      </div>
-                      <strong>{item.price * item.quantity} kr.</strong>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <div className="order-events">
+                  <ul>
+                    {order.items.map((item) => (
+                      <li key={item.id}>
+                        <div>
+                          <h3>
+                            {item.name}{" "}
+                            <span className="order-item-quantity">
+                              x {item.quantity}{" "}
+                              {item.quantity === 1 ? "ticket" : "tickets"}
+                            </span>
+                          </h3>
+                        </div>
+                        <strong>{item.price * item.quantity} kr.</strong>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-              <div className="order-card-footer">
-                <Link
-                  className="orders-back-link"
-                  to={`/orders/${order.id}`}
-                >
-                  Order details
-                </Link>
-                <p>
-                  <span>Total price:</span>
-                  <strong>{order.totalPrice} kr.</strong>
-                </p>
-              </div>
+                <div className="order-card-footer">
+                  <p>
+                    <span>Total:</span>
+                    <strong>{order.totalPrice} kr.</strong>
+                  </p>
+                </div>
+              </Link>
             </li>
           ))}
         </ul>

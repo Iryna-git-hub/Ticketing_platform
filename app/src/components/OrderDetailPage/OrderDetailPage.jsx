@@ -75,12 +75,54 @@ export default function OrderDetailPage() {
     <section className="order-detail-page content-width">
       <article className="order-detail-card panel-card">
         <header className="order-detail-header">
-          <h1>Order #{order.id}</h1>
+          <div className="order-detail-title-row">
+            <h1>Order #{order.id}</h1>
+            <span className="order-detail-status">
+              {order.status || "Placed"}
+            </span>
+          </div>
           <p>
             <span>Created date</span>
             <strong>{new Date(order.createdAt).toLocaleDateString()}</strong>
           </p>
         </header>
+
+        <section className="order-detail-section">
+          <ul className="order-detail-items">
+            {order.items.map((item) => (
+              <li key={item.id}>
+                <div>
+                  <h3>
+                    <Link
+                      className="order-detail-item-link"
+                      to={`/events/${item.id}`}
+                    >
+                      {item.name}
+                    </Link>{" "}
+                    <span className="order-detail-item-quantity">
+                      x {item.quantity}{" "}
+                      {item.quantity === 1 ? "ticket" : "tickets"}
+                    </span>
+                  </h3>
+                  <div className="order-detail-item-actions">
+                    <Link
+                      className="order-detail-tickets-button"
+                      to={`/events/${item.id}`}
+                    >
+                      Show ticket
+                    </Link>
+                  </div>
+                </div>
+                <strong>{item.price * item.quantity} kr.</strong>
+              </li>
+            ))}
+          </ul>
+
+          <div className="order-detail-total">
+            <span>Total</span>
+            <strong>{order.totalPrice} kr.</strong>
+          </div>
+        </section>
 
         <section className="order-detail-section">
           <h2>Customer details</h2>
@@ -101,31 +143,6 @@ export default function OrderDetailPage() {
             )}
           </div>
         </section>
-
-        <section className="order-detail-section">
-          <h2>Payment method</h2>
-          <p className="order-detail-payment">{order.paymentMethod}</p>
-        </section>
-
-        <section className="order-detail-section">
-          <h2>Items</h2>
-          <ul className="order-detail-items">
-            {order.items.map((item) => (
-              <li key={item.id}>
-                <div>
-                  <h3>{item.name}</h3>
-                  <p>Quantity: {item.quantity}</p>
-                </div>
-                <strong>{item.price * item.quantity} kr.</strong>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <div className="order-detail-total">
-          <span>Total</span>
-          <strong>{order.totalPrice} kr.</strong>
-        </div>
 
         <div className="order-detail-actions">
           <Link className="order-detail-back-link" to="/orders">

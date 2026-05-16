@@ -22,35 +22,70 @@
 }
 
 .order-detail-header {
-  display: grid;
-  gap: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 14px;
   border-bottom: 1px solid var(--panel-card-border);
+  background-color: #faf8f6;
 }
 
 .order-detail-header h1 {
-  color: var(--secondary-color);
-  font-size: 1.55rem;
+  color: color-mix(in srgb, var(--secondary-color) 46%, white);
+  font-size: 0.7rem;
+  font-weight: 600;
   line-height: 1.2;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
 }
 
-.order-detail-header p,
+.order-detail-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-detail-status {
+  display: inline-flex;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background-color: var(--tertiary-color);
+  color: var(--primary-color);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .order-detail-info p {
   display: grid;
   gap: 4px;
   color: var(--secondary-color);
 }
 
-.order-detail-header span,
 .order-detail-info span {
   color: color-mix(in srgb, var(--secondary-color) 65%, white);
   font-size: 0.76rem;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
-.order-detail-header strong,
 .order-detail-info strong {
   font-weight: 700;
+}
+
+.order-detail-header p {
+  color: color-mix(in srgb, var(--secondary-color) 46%, white);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.order-detail-header span {
+  display: none;
 }
 
 .order-detail-section {
@@ -60,22 +95,18 @@
 }
 
 .order-detail-section h2 {
-  color: var(--secondary-color);
-  font-size: 1.15rem;
-  font-weight: 800;
+  color: color-mix(in srgb, var(--secondary-color) 46%, white);
+  font-size: 0.7rem;
+  font-weight: 600;
   margin: -20px -20px 0;
-  padding: 20px;
+  padding: 14px 20px;
   background-color: #faf8f6;
+  text-transform: uppercase;
 }
 
 .order-detail-info {
   display: grid;
   gap: 14px;
-}
-
-.order-detail-payment {
-  color: var(--secondary-color);
-  font-weight: 700;
 }
 
 .order-detail-items {
@@ -104,16 +135,62 @@
   line-height: 1.3;
 }
 
-.order-detail-items p {
-  margin-top: 4px;
+.order-detail-item-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.order-detail-item-link:hover,
+.order-detail-item-link:focus-visible {
+  color: var(--primary-color);
+  outline: none;
+}
+
+.order-detail-item-quantity {
   color: color-mix(in srgb, var(--secondary-color) 75%, white);
   font-size: 0.86rem;
+  font-weight: 400;
 }
 
 .order-detail-items strong {
   color: var(--secondary-color);
   font-weight: 700;
   white-space: nowrap;
+}
+
+.order-detail-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.order-detail-tickets-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 8px 12px;
+  border: 1px solid var(--panel-card-border);
+  border-radius: var(--radius-8);
+  background: #fff;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.order-detail-tickets-button:hover,
+.order-detail-tickets-button:focus-visible {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: var(--tertiary-color);
 }
 
 .order-detail-total {
@@ -133,11 +210,14 @@
 
 .order-detail-actions {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .order-detail-back-link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   width: fit-content;
   padding: 14px 16px;
   border: 1px solid var(--panel-card-border);
@@ -145,11 +225,14 @@
   background: #fff;
   color: var(--primary-color);
   cursor: pointer;
+  font: inherit;
   font-size: 0.75rem;
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
-  transition: 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .order-detail-back-link:hover {
@@ -157,15 +240,20 @@
   background-color: var(--tertiary-color);
 }
 
+.order-detail-back-link:focus-visible {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
 .order-detail-back-link::before {
-  content: "<";
-  padding-right: 10px;
+  content: "⟵";
   line-height: 1;
+  padding: 0 10px;
   transition: 0.2s ease;
 }
 
 .order-detail-back-link:hover::before {
-  padding-right: 6px;
+  padding-left: 0;
 }
 
 .order-detail-message {
@@ -194,12 +282,12 @@
   }
 
   .order-detail-header {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: start;
+    display: flex;
+    align-items: flex-start;
   }
 
   .order-detail-header h1 {
-    font-size: 1.7rem;
+    font-size: 0.7rem;
   }
 
   .order-detail-info {
