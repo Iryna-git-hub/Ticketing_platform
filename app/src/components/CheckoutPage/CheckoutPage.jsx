@@ -24,12 +24,60 @@ export default function CheckoutPage() {
     items.length > 0 &&
     user;
 
-  function handleSubmit(event) {
+  if (!user) {
+    return (
+      <section className="checkout-empty content-width panel-card">
+        <h1>Login required</h1>
+        <p>You must be logged in to checkout.</p>
+        <Link to="/login" className="checkout-button primary-button">
+          Login
+        </Link>
+      </section>
+    );
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
     setShowErrors(true);
+    setError("");
 
     if (!isFormValid) {
       return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(api("/orders"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          customer: {
+            fullName,
+            email,
+            phoneNumber,
+          },
+          paymentMethod,
+          items,
+          totalPrice,
+          createdAt: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Could not place your order. Please try again.");
+      }
+
+      const order = await response.json();
+      clearCart();
+      navigate(`/orders/${order.id}`);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -108,11 +156,11 @@ export default function CheckoutPage() {
                 <input
                   type="radio"
                   name="payment-method"
-                  value="paypal"
-                  checked={paymentMethod === "paypal"}
+                  value="mobilePay"
+                  checked={paymentMethod === "mobilePay"}
                   onChange={(event) => setPaymentMethod(event.target.value)}
                 />
-                PayPal
+                MobilePay
               </label>
 
               {showErrors && !paymentMethod && (
@@ -121,6 +169,12 @@ export default function CheckoutPage() {
             </div>
           </div>
 
+          {error && (
+            <p className="checkout-error" role="alert">
+              {error}
+            </p>
+          )}
+
           <div className="checkout-actions">
             <Link to="/cart" className="checkout-empty-link">
               Edit cart
@@ -128,9 +182,9 @@ export default function CheckoutPage() {
             <button
               type="submit"
               className="checkout-button primary-button"
-              disabled={!isFormValid}
+              disabled={loading}
             >
-              Pay now
+              {loading ? "Placing order..." : "Pay now"}
             </button>
           </div>
         </div>

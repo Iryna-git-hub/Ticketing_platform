@@ -4,8 +4,14 @@ import { CalendarIcon } from "../EventIcons/EventIcons.jsx";
 import "./CartPage.css";
 
 export default function CartPage() {
-  const { items, updateQuantity, removeItem, clearCart, totalPrice, totalQuantity } =
-    useCart();
+  const {
+    items,
+    updateQuantity,
+    removeItem,
+    clearCart,
+    totalPrice,
+    totalQuantity,
+  } = useCart();
 
   const formatPrice = (price) => `${price} kr.`;
 
@@ -14,7 +20,10 @@ export default function CartPage() {
       <section className="cart-page cart-page-empty content-width">
         <div className="cart-card panel-card">
           <p>Your cart is empty.</p>
-          <Link to="/events" className="cart-empty-button event-detail-button secondary-button">
+          <Link
+            to="/events"
+            className="cart-empty-button event-detail-button secondary-button"
+          >
             Find more events
           </Link>
         </div>
@@ -39,7 +48,11 @@ export default function CartPage() {
           <span>Price</span>
           <span>Quantity</span>
           <span>Total</span>
-          <button className="cart-clear-button secondary-button" type="button" onClick={clearCart}>
+          <button
+            className="cart-clear-button secondary-button"
+            type="button"
+            onClick={clearCart}
+          >
             Empty cart
           </button>
         </div>
@@ -59,7 +72,10 @@ export default function CartPage() {
                 {formatPrice(item.price)}
               </p>
 
-              <div className="cart-quantity event-ticket-quantity-group" data-label="Quantity">
+              <div
+                className="cart-quantity event-ticket-quantity-group"
+                data-label="Quantity"
+              >
                 <div className="cart-quantity-stepper event-ticket-stepper">
                   <button
                     className="event-ticket-stepper-button"
@@ -76,7 +92,10 @@ export default function CartPage() {
                     min="1"
                     value={item.quantity}
                     onChange={(e) =>
-                      updateQuantity(item.id, Math.max(1, Number(e.target.value)))
+                      updateQuantity(
+                        item.id,
+                        Math.max(1, Number(e.target.value)),
+                      )
                     }
                     aria-label="Ticket quantity"
                   />

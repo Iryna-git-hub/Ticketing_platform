@@ -30,7 +30,7 @@
 }
 
 .checkout-header {
-  width: min(100%, 760px);
+  width: min(100%, 980px);
 }
 
 .checkout-header h1 {
@@ -83,8 +83,16 @@
 }
 
 .checkout-section h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   color: var(--secondary-color);
   font-size: 1.15rem;
+  font-weight: 800;
+  margin: -20px -20px 0;
+  padding: 20px;
+  background-color: #faf8f6;
 }
 
 .checkout-summary-table {
