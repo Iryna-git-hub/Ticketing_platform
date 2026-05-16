@@ -1,16 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import api from "../../api";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 import "./CheckoutPage.css";
 
 export default function CheckoutPage() {
-  const { items, totalPrice } = useCart();
+  const navigate = useNavigate();
+  const { user, token } = useAuth();
+  const { items, totalPrice, clearCart } = useCart();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [showErrors, setShowErrors] = useState(false);
-  const [demoMessage, setDemoMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const isFormValid = fullName.trim() && email.trim() && paymentMethod;
 
@@ -21,8 +26,6 @@ export default function CheckoutPage() {
     if (!isFormValid) {
       return;
     }
-
-    setDemoMessage("This is a demo checkout.");
   }
 
   return (
@@ -121,12 +124,6 @@ export default function CheckoutPage() {
               Pay now
             </button>
           </div>
-
-          {demoMessage && (
-            <p className="checkout-demo-message" role="status">
-              {demoMessage}
-            </p>
-          )}
         </div>
 
         <aside className="checkout-section checkout-order-summary">
