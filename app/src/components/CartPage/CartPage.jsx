@@ -13,7 +13,6 @@ export default function CartPage() {
     return (
       <section className="cart-page cart-page-empty content-width">
         <div className="cart-card panel-card">
-          <h1>Event Cart</h1>
           <p>Your cart is empty.</p>
           <Link to="/events" className="cart-empty-button event-detail-button secondary-button">
             Find more events

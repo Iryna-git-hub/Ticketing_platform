@@ -73,7 +73,7 @@ export default function CheckoutPage() {
               {showErrors && !email.trim() && (
                 <p className="checkout-error">Email is required.</p>
               )}
-              
+
               {showErrors && email.trim() && !email.includes("@") && (
                 <p className="checkout-error">Enter a valid email address.</p>
               )}
