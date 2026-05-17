@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext.jsx";
+import { prefetchEventDetail } from "../../eventRequests.js";
 import {
   CalendarIcon,
   ClockIcon,
@@ -35,6 +36,10 @@ export default function EventCard({ event }) {
   function handleAddToCart() {
     addItem(event, 1);
     setIsCartModalOpen(true);
+  }
+
+  function handlePrefetch() {
+    prefetchEventDetail(event.id);
   }
 
   return (
@@ -102,6 +107,8 @@ export default function EventCard({ event }) {
           <Link
             className="event-card-link secondary-button"
             to={`/events/${event.id}`}
+            onMouseEnter={handlePrefetch}
+            onFocus={handlePrefetch}
           >
             View details
           </Link>

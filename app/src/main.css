@@ -160,6 +160,126 @@ footer {
   padding: 0 5px;
 }
 
+.nav-profile {
+  position: relative;
+}
+
+.nav-profile-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background-color: #fff;
+  color: var(--secondary-color);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.nav-profile-button:hover {
+  background-color: #fff;
+  color: var(--primary-color);
+}
+
+.nav-profile-button:focus-visible {
+  outline: 3px solid #ffd2dc;
+  outline-offset: 3px;
+}
+
+.nav-profile-button .event-icon {
+  width: 21px;
+  height: 21px;
+  color: currentColor;
+  stroke-width: 2.1;
+}
+
+.profile-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 20;
+  display: grid;
+  width: min(280px, calc(100vw - 48px));
+  overflow: hidden;
+  padding: 0;
+  box-shadow: 0 16px 32px rgb(81 62 62 / 14%);
+}
+
+.profile-menu:hover {
+  border-color: var(--panel-card-border);
+}
+
+.profile-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--panel-card-border);
+  background-color: #faf8f6;
+}
+
+.profile-avatar {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: var(--secondary-color);
+}
+
+.profile-avatar .event-icon {
+  width: 21px;
+  height: 21px;
+  color: currentColor;
+}
+
+.profile-menu-header p {
+  color: var(--secondary-color);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.profile-menu-header span {
+  color: color-mix(in srgb, var(--secondary-color) 70%, white);
+  font-size: 0.84rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.profile-menu-item {
+  display: block;
+  width: 100%;
+  padding: 13px 16px;
+  border: 0;
+  background-color: #fff;
+  color: var(--secondary-color);
+  cursor: pointer;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.profile-menu-item:last-child {
+  border-top: 1px solid var(--panel-card-border);
+}
+
+.profile-menu-item:hover,
+.profile-menu-item:focus-visible {
+  outline: none;
+  background-color: var(--tertiary-color);
+  color: var(--primary-color);
+}
+
 .nav-action {
   display: inline-flex;
   align-items: center;
