@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import EventList from "../EventList/EventList.jsx";
 import Pagination from "../Pagination/Pagination.jsx";
 import { SearchIcon } from "../EventIcons/EventIcons.jsx";
-import api from "../../api.js";
+import { getEvents, prefetchEvents } from "../../eventRequests.js";
 import "./EventsPage.css";
 
 const sortOptions = [
@@ -28,6 +28,39 @@ export default function EventsPage() {
     sortOptions.find((option) => option.value === sortBy)?.label ||
     "Earliest first";
 
+  function getEventsRoute(pageNumber) {
+    const params = new URLSearchParams({
+      _page: String(pageNumber),
+      _limit: String(limit),
+    });
+
+    if (filterQuery.trim()) {
+      params.set("q", filterQuery.trim());
+    }
+
+    if (sortBy === "date-asc") {
+      params.set("_sort", "date");
+      params.set("_order", "asc");
+    }
+
+    if (sortBy === "price-asc") {
+      params.set("_sort", "price");
+      params.set("_order", "asc");
+    }
+
+    if (sortBy === "price-desc") {
+      params.set("_sort", "price");
+      params.set("_order", "desc");
+    }
+
+    if (sortBy === "available") {
+      params.set("_sort", "ticketsAvailable");
+      params.set("_order", "desc");
+    }
+
+    return `/events?${params.toString()}`;
+  }
+
   useEffect(() => {
     function handleEscape(event) {
       if (event.key === "Escape") {
@@ -50,49 +83,13 @@ export default function EventsPage() {
 
   useEffect(() => {
     async function fetchEvents() {
-      const params = new URLSearchParams({
-        _page: String(page),
-        _limit: String(limit),
-      });
-
       setLoading(true);
       setError("");
 
-      if (filterQuery.trim()) {
-        params.set("q", filterQuery.trim());
-      }
-
-      if (sortBy === "date-asc") {
-        params.set("_sort", "date");
-        params.set("_order", "asc");
-      }
-
-      if (sortBy === "price-asc") {
-        params.set("_sort", "price");
-        params.set("_order", "asc");
-      }
-
-      if (sortBy === "price-desc") {
-        params.set("_sort", "price");
-        params.set("_order", "desc");
-      }
-
-      if (sortBy === "available") {
-        params.set("_sort", "ticketsAvailable");
-        params.set("_order", "desc");
-      }
-
       try {
-        const response = await fetch(api(`/events?${params.toString()}`));
-
-        if (!response.ok) {
-          throw new Error("Could not load events. Please try again.");
-        }
-
-        const data = await response.json();
-        setTotalCount(Number(response.headers.get("X-Total-Count")) || 0);
-
-        setEvents(data);
+        const result = await getEvents(getEventsRoute(page));
+        setEvents(result.events);
+        setTotalCount(result.totalCount);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -102,6 +99,12 @@ export default function EventsPage() {
 
     fetchEvents();
   }, [filterQuery, page, sortBy]);
+
+  useEffect(() => {
+    if (page < totalPages) {
+      prefetchEvents(getEventsRoute(page + 1));
+    }
+  }, [filterQuery, page, sortBy, totalPages]);
 
   return (
     <section className="events-page">
@@ -186,12 +189,11 @@ export default function EventsPage() {
 
       {!loading && !error && <EventList events={events} />}
       {!loading && !error && (
-        
-          <Pagination currentPage={page} totalPages={totalPages} onPageChange={setPage} />
-
-       
-        
-        
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
       )}
     </section>
   );

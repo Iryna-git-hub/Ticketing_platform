@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import heroVideo from "../../assets/home-hero-video.mp4";
+import { prefetchEvents } from "../../eventRequests.js";
 import "./HomePage.css";
 
 function HomePage() {
+  useEffect(() => {
+    prefetchEvents("/events?_page=1&_limit=8&_sort=date&_order=asc");
+  }, []);
+
   return (
     <section className="home-page">
       <div className="home-hero">

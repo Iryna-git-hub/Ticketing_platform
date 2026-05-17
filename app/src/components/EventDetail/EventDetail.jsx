@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import api from "../../api.js";
+import { getEventDetail } from "../../eventRequests.js";
 import {
   CalendarIcon,
   ClockIcon,
@@ -25,18 +25,8 @@ export default function EventDetail() {
       setError("");
 
       try {
-        const response = await fetch(api(`/events/${id}`));
-
-        if (response.status === 404) {
-          throw new Error("Event not found.");
-        }
-
-        if (!response.ok) {
-          throw new Error("Could not load event details.");
-        }
-
-        const data = await response.json();
-        setEvent(data);
+        const event = await getEventDetail(id);
+        setEvent(event);
       } catch (err) {
         setError(err.message);
       } finally {
