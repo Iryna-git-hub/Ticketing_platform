@@ -316,8 +316,3 @@ Possible next steps:
 - improve responsive layouts for smaller screens;
 - add automated tests for cart, checkout, and authentication flows.
 
----
-
-## Author
-
-Created by **Iryna Lopatina**.
