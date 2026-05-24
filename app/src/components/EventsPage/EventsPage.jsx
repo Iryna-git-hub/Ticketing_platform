@@ -1,79 +1,200 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import EventList from "../EventList/EventList.jsx";
-import events from "../../data/events.js";
+import Pagination from "../Pagination/Pagination.jsx";
+import { SearchIcon } from "../EventIcons/EventIcons.jsx";
+import { getEvents, prefetchEvents } from "../../eventRequests.js";
 import "./EventsPage.css";
 
+const sortOptions = [
+  { value: "date-asc", label: "Earliest first" },
+  { value: "price-asc", label: "Price: low to high" },
+  { value: "price-desc", label: "Price: high to low" },
+  { value: "available", label: "Most available" },
+];
+
 export default function EventsPage() {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
   const [sortBy, setSortBy] = useState("date-asc");
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const limit = 8;
 
-  const visibleEvents = useMemo(() => {
-    const normalizedQuery = filterQuery.trim().toLowerCase();
+  const totalPages = Math.ceil(totalCount / limit) || 1;
+  const selectedSortLabel =
+    sortOptions.find((option) => option.value === sortBy)?.label ||
+    "Earliest first";
 
-    const filteredEvents = events.filter((event) => {
-      if (!normalizedQuery) {
-        return true;
-      }
-
-      return (
-        event.name.toLowerCase().includes(normalizedQuery) ||
-        event.category.toLowerCase().includes(normalizedQuery) ||
-        event.city.toLowerCase().includes(normalizedQuery)
-      );
+  function getEventsRoute(pageNumber) {
+    const params = new URLSearchParams({
+      _page: String(pageNumber),
+      _limit: String(limit),
     });
 
-    const sortedEvents = filteredEvents.sort((firstEvent, secondEvent) => {
-      switch (sortBy) {
-        case "price-asc":
-          return firstEvent.price - secondEvent.price;
-        case "price-desc":
-          return secondEvent.price - firstEvent.price;
-        case "available":
-          return secondEvent.ticketsAvailable - firstEvent.ticketsAvailable;
-        case "date-asc":
-        default:
-          return new Date(firstEvent.date) - new Date(secondEvent.date);
-      }
-    });
+    if (filterQuery.trim()) {
+      params.set("q", filterQuery.trim());
+    }
 
-    return sortedEvents;
-  }, [filterQuery, sortBy]);
+    if (sortBy === "date-asc") {
+      params.set("_sort", "date");
+      params.set("_order", "asc");
+    }
+
+    if (sortBy === "price-asc") {
+      params.set("_sort", "price");
+      params.set("_order", "asc");
+    }
+
+    if (sortBy === "price-desc") {
+      params.set("_sort", "price");
+      params.set("_order", "desc");
+    }
+
+    if (sortBy === "available") {
+      params.set("_sort", "ticketsAvailable");
+      params.set("_order", "desc");
+    }
+
+    return `/events?${params.toString()}`;
+  }
+
+  useEffect(() => {
+    function handleEscape(event) {
+      if (event.key === "Escape") {
+        setIsSortOpen(false);
+      }
+    }
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  function handleSortBlur(event) {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      setIsSortOpen(false);
+    }
+  }
+
+  useEffect(() => {
+    async function fetchEvents() {
+      setLoading(true);
+      setError("");
+
+      try {
+        const result = await getEvents(getEventsRoute(page));
+        setEvents(result.events);
+        setTotalCount(result.totalCount);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchEvents();
+  }, [filterQuery, page, sortBy]);
+
+  useEffect(() => {
+    if (page < totalPages) {
+      prefetchEvents(getEventsRoute(page + 1));
+    }
+  }, [filterQuery, page, sortBy, totalPages]);
 
   return (
     <section className="events-page">
-      <div className="events-toolbar content-width panel-card">
-        <div className="events-toolbar-copy">
-          <h1>Find your next event</h1>
-          <p>Search events and sort by date, price, or ticket availability.</p>
-        </div>
+      <div className="content-width">
+        <h1>Find your next event</h1>
+      </div>
 
+      <div className="events-toolbar content-width panel-card">
         <div className="events-toolbar-controls">
           <label className="events-toolbar-field">
             <span>Search</span>
-            <input
-              type="text"
-              value={filterQuery}
-              onChange={(e) => setFilterQuery(e.target.value)}
-              placeholder="Search by event, category, or city"
-            />
+            <div className="events-toolbar-search">
+              <SearchIcon />
+              <input
+                type="text"
+                value={filterQuery}
+                onChange={(e) => {
+                  setFilterQuery(e.target.value);
+                  setPage(1);
+                }}
+                placeholder="Search by event, category, or city"
+              />
+            </div>
           </label>
 
-          <label className="events-toolbar-field">
-            <span>Sort by</span>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              <option value="date-asc">Earliest first</option>
-              <option value="price-asc">Price: low to high</option>
-              <option value="price-desc">Price: high to low</option>
-              <option value="available">Most available</option>
-            </select>
-          </label>
+          <div className="events-toolbar-field">
+            <span id="sort-by-label">Sort by</span>
+            <div className="events-toolbar-sort" onBlur={handleSortBlur}>
+              <button
+                type="button"
+                className="events-sort-trigger"
+                aria-haspopup="listbox"
+                aria-expanded={isSortOpen}
+                aria-labelledby="sort-by-label"
+                onClick={() => setIsSortOpen((isOpen) => !isOpen)}
+              >
+                <span>{selectedSortLabel}</span>
+                <span
+                  className={`events-sort-chevron ${isSortOpen ? "is-open" : ""}`}
+                  aria-hidden="true"
+                />
+              </button>
+
+              {isSortOpen && (
+                <ul
+                  className="events-sort-menu"
+                  role="listbox"
+                  aria-labelledby="sort-by-label"
+                >
+                  {sortOptions.map((option) => (
+                    <li
+                      key={option.value}
+                      role="option"
+                      aria-selected={sortBy === option.value}
+                    >
+                      <button
+                        type="button"
+                        className={`events-sort-option ${sortBy === option.value ? "is-active" : ""}`}
+                        onClick={() => {
+                          setSortBy(option.value);
+                          setPage(1);
+                          setIsSortOpen(false);
+                        }}
+                      >
+                        {option.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
-      <EventList events={visibleEvents} />
+      {loading && <p className="content-width">Loading events...</p>}
+      {error && (
+        <p className="content-width" role="alert">
+          {error}
+        </p>
+      )}
+
+      {!loading && !error && <EventList events={events} />}
+      {!loading && !error && (
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
+      )}
     </section>
   );
 }

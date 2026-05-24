@@ -1,11 +1,47 @@
-﻿import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext.jsx";
+import { prefetchEventDetail } from "../../eventRequests.js";
 import {
   CalendarIcon,
   ClockIcon,
   MapPinIcon,
 } from "../EventIcons/EventIcons.jsx";
+import TicketAddedModal from "../TicketAddedModal/TicketAddedModal.jsx";
 
 export default function EventCard({ event }) {
+  const { addItem } = useCart();
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const getWholePrice = (price) => String(Math.trunc(Number(price)));
+
+  const renderPrice = (price) => {
+    const whole = getWholePrice(price);
+
+    return (
+      <>
+        <span className="event-money-whole">{whole}</span>
+        <span className="event-money-currency"> kr.</span>
+      </>
+    );
+  };
+
+  const renderEventPrice = (price) => {
+    if (Number(price) === 0) {
+      return <span className="event-money-whole">Free</span>;
+    }
+
+    return renderPrice(price);
+  };
+
+  function handleAddToCart() {
+    addItem(event, 1);
+    setIsCartModalOpen(true);
+  }
+
+  function handlePrefetch() {
+    prefetchEventDetail(event.id);
+  }
+
   return (
     <li className="event-card panel-card">
       <div className="event-card-top">
@@ -38,7 +74,7 @@ export default function EventCard({ event }) {
           <span
             className={event.ticketsAvailable === 0 && "event-price-sold-out"}
           >
-            {event.price === 0 ? "Free" : `${event.price} DKK`}
+            {renderEventPrice(event.price)}
           </span>
         </p>
 
@@ -57,24 +93,32 @@ export default function EventCard({ event }) {
         <div className="event-card-actions">
           {event.ticketsAvailable === 0 ? (
             <button className="event-card-link primary-button" disabled>
-              Buy ticket
+              Add to cart
             </button>
           ) : (
-            <Link
+            <button
+              type="button"
               className="event-card-link primary-button"
-              to={`/events/${event.id}`}
+              onClick={handleAddToCart}
             >
-              Buy ticket
-            </Link>
+              Add to cart
+            </button>
           )}
           <Link
             className="event-card-link secondary-button"
             to={`/events/${event.id}`}
+            onMouseEnter={handlePrefetch}
+            onFocus={handlePrefetch}
           >
             View details
           </Link>
         </div>
       </div>
+
+      <TicketAddedModal
+        isOpen={isCartModalOpen}
+        onClose={() => setIsCartModalOpen(false)}
+      />
     </li>
   );
 }
