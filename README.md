@@ -1,246 +1,325 @@
-<img src="./images/hyf.svg" alt="image" width="200px" height="200px">
+# GoEvent Copenhagen — Ticketing Platform
 
-# HackYourFuture project template
+GoEvent Copenhagen is a ticketing platform for browsing tech events in Copenhagen, viewing event details, adding tickets to a cart, checking out, and reviewing placed orders.
 
-This full-stack app template is meant to be used as the starting point of any projects (including meal-sharing and final projects).
+The project was built as a frontend-focused React application with authentication, protected user flows, cart management, checkout validation, and order history.
 
-It consists of two packages:
+## Live Demo
 
-- `api` which is a NodeJS project using Express for the API, with options to connect to SQLite, MySQL and PostgreSQL databases.
-- `app` which has templates for Vanilla JS, Vite/React or NextJS/React for the web app
+[Open deployed app](https://ticketing-platform-plum.vercel.app/)
 
-Both packages are as small as possible, but feel free to add more tools and templates as you see fit.
+## Repository
 
-## Pre-requisites
+[GitHub repository](https://github.com/Iryna-git-hub/Ticketing_platform)
 
+---
 
+## Preview
 
-## Getting started
+> The screenshots below are stored in `images/readme/`.  
+> If you add new screenshots, keep the same file names or update the paths in this README.
 
-> Before you start, make sure no other projects are running, in order to have the required ports free.
+### Home page
 
-### Setting up the Database
+![Home page hero section](images/readme/home-hero.png)
 
-This project template defaults to using an SQLite database, which is stored in a generated file in the api directory. It doesn't need a separate service to run. 
+### Events listing with search and sorting
 
-If you wish to use MySQL instead, here's a quick way to get one set up and running using Docker: 
-`docker run --name mysql -e MYSQL_ROOT_PASSWORD=mysql-root-password -e MYSQL_DATABASE=my-database -d -p 3306:3306 mysql:latest`
+![Events listing with search and sorting](images/readme/events-search-sort.png)
 
-Whichever database you set up, connect to it using any database management tool of your choice, such as MySQL Workbench or DBeaver, to create your tables and add data.
-![Testing your database](./images/db_test.png)
+### Event details
 
-### Setting up the API
+![Event details page](images/readme/event-details.png)
 
-In a terminal, run the following commands:
+### Add to cart modal
 
+![Ticket added to cart modal](images/readme/add-to-cart-modal.png)
+
+### Cart
+
+![Event cart](images/readme/cart.png)
+
+### Checkout
+
+![Checkout page](images/readme/checkout.png)
+
+### User menu and order history
+
+![User menu](images/readme/user-menu.png)
+
+![My orders page](images/readme/my-orders.png)
+
+### Order details
+
+![Order details page](images/readme/order-details.png)
+
+---
+
+## Project Overview
+
+GoEvent Copenhagen helps users find and buy tickets for tech-related events such as workshops, meetups, conferences, bootcamps, and hackathons.
+
+The main user flow is:
+
+1. Browse available events.
+2. Search or sort events.
+3. Open an event details page.
+4. Choose ticket quantity.
+5. Add tickets to the cart.
+6. Review and update cart items.
+7. Complete checkout.
+8. View order history and order details.
+
+The app focuses on a clear event discovery and ticket-purchase experience, while also demonstrating real application concerns such as routing, authentication, protected pages, form validation, persistent session state, and API integration.
+
+---
+
+## Features
+
+### Event browsing
+
+Users can browse a list of available events. Each event card shows the category, event title, date, time, location, price, and ticket availability.
+
+### Search and sorting
+
+Users can search events by title, category, or city. They can also sort events by:
+
+- earliest date first;
+- price from low to high;
+- price from high to low;
+- most available tickets.
+
+### Event details page
+
+Each event has a details page with extended information, including:
+
+- event category;
+- date;
+- time;
+- location;
+- ticket price;
+- available ticket count;
+- event overview;
+- ticket quantity selector;
+- calculated total price.
+
+### Authentication
+
+Users can register, log in, and sign out. After login, the application displays the user state in the header and unlocks authenticated user actions.
+
+### Cart
+
+Users can add tickets to the cart, see the cart item count in the header, change quantities, remove items, empty the cart, and review the total price before checkout.
+
+### Checkout
+
+The checkout page includes customer details, payment method selection, order summary, and form validation. The user must provide required information before placing an order.
+
+### Orders
+
+Authenticated users can view their order history and open individual order details. The order details page shows purchased tickets, total price, and customer information.
+
+---
+
+## Tech Stack
+
+- React
+- Vite
+- React Router
+- JavaScript
+- CSS
+- Mock REST API with `json-server`
+- Authentication with `json-server-auth`
+- Local storage for session/cart persistence
+- Vercel deployment
+
+---
+
+## Project Structure
+
+```text
+Ticketing_platform/
+├── api/
+│   └── ...
+├── app/
+│   ├── api/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   └── ...
+│   ├── .env.example
+│   ├── package.json
+│   └── vite.config.js
+├── images/
+│   └── readme/
+└── README.md
 ```
-cd api
-cp .env-template .env
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Iryna-git-hub/Ticketing_platform.git
+cd Ticketing_platform
 ```
 
-Open your .env file and configure the options as appropriate. The first thing you need to do is comment out/in the correct section in Database Configuration, depending on the database you chose in the first step. Set the variables to the correct values based on your set up.
+### 2. Install app dependencies
 
-Then you're ready to start it up:
-
-```
-npm install
-npm run dev
-```
-
-You can then test the API using [Postman](https://www.postman.com/) at [http://localhost:3001/api](http://localhost:3001/api) - or just open it in your browser, for a quick peek that things are connecting successfully!
-
-![Testing the API with Postman](./images/api_test.png)
-
-### Setting up the App
-
-The app can be found in the `app` directory... but if this is a new project, it will be empty! Check out the `templates` directory, and copy over one of the options that best suits your needs (or you've been instructed to use).
-
-1. `app-vite-vanilla` - This is a vanilla js app, that is best suited for simple apps like the foundation final project.
-2. `app-vite` - Great for a more complex React app.
-3. `app-next` - Suitable for when you'd like to use the NextJS framework to build your app.
-
-In a second terminal, run the following commands:
-
-```
+```bash
 cd app
 npm install
+```
+
+### 3. Create environment file
+
+```bash
+cp .env.example .env
+```
+
+Make sure the API URL is configured correctly in `.env`.
+
+For local development with the mock API, use:
+
+```env
+VITE_API_URL=http://localhost:3001
+```
+
+### 4. Run the app and mock API
+
+```bash
+npm run dev:all
+```
+
+This starts both the Vite frontend and the mock API.
+
+Alternatively, run them in separate terminals:
+
+```bash
 npm run dev
+npm run api
 ```
 
-You can then open the web app at [http://localhost:3000](http://localhost:3000).
-![Testing the app with a browser](./images/app_test.png)
+Default local URLs:
 
-## Common issues
-
-### Port conflict
-
-If you see the below error when trying to start either the API or the web app, then you have a port conflict.  
-Some other process is already listening on the port you want to use. Either stop that process or use another port by changing the PORT variable in the `.env` file for the package that is facing the conflict (API or web app).
-
-```
-node:events:496
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::3001
-    at Server.setupListenHandle [as _listen2] (node:net:1897:16)
-    at listenInCluster (node:net:1945:12)
-    at Server.listen (node:net:2037:7)
-    at Function.listen (/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/express/lib/application.js:635:24)
-    at file:///Users/hyf/dev/hyf/hyf-project-template/api/src/index.js:29:5
-    at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:323:24)
-    at async loadESM (node:internal/process/esm_loader:28:7)
-    at async handleMainPromise (node:internal/modules/run_main:113:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1924:8)
-    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
-  code: 'EADDRINUSE',
-  errno: -48,
-  syscall: 'listen',
-  address: '::',
-  port: 3001
-}
+```text
+Frontend: http://localhost:5173
+Mock API: http://localhost:3001
 ```
 
-### Wrong database credentials
+---
 
-If you see the error below when trying to make a query to your database it means that the variables `DB_USER` and `DB_PASSWORD` don't match the username and password used when starting the database container. Either find the right credentials or recreate your database container and store the new credentials.
+## API Overview
 
-```
-/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/mysql2/lib/packets/packet.js:728
-    const err = new Error(message);
-                ^
+The project uses a mock REST API for events, authentication, and orders.
 
-Error: Access denied for user 'root'@'192.168.65.1' (using password: YES)
-    at Packet.asError (/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/mysql2/lib/packets/packet.js:728:17)
-    at ClientHandshake.execute (/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/mysql2/lib/commands/command.js:29:26)
-    at Connection.handlePacket (/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/mysql2/lib/connection.js:481:34)
-    at PacketParser.onPacket (/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/mysql2/lib/connection.js:97:12)
-    at PacketParser.executeStart (/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/mysql2/lib/packet_parser.js:75:16)
-    at Socket.<anonymous> (/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/mysql2/lib/connection.js:104:25)
-    at Socket.emit (node:events:519:28)
-    at addChunk (node:internal/streams/readable:559:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
-    at Readable.push (node:internal/streams/readable:390:5) {
-  code: 'ER_ACCESS_DENIED_ERROR',
-  errno: 1045,
-  sqlState: '28000',
-  sqlMessage: "Access denied for user 'root'@'192.168.65.1' (using password: YES)",
-  sql: undefined
-}
+Main endpoints:
+
+| Method | Endpoint | Auth required | Description |
+|---|---|---:|---|
+| `GET` | `/events` | No | Get all events |
+| `GET` | `/events/:id` | No | Get single event details |
+| `POST` | `/register` | No | Create user account |
+| `POST` | `/login` | No | Log in and receive access token |
+| `GET` | `/orders` | Yes | Get user orders |
+| `POST` | `/orders` | Yes | Place an order |
+| `PATCH` | `/orders/:id` | Yes | Update an order |
+| `DELETE` | `/orders/:id` | Yes | Delete an order |
+
+Protected requests use the access token:
+
+```js
+Authorization: Bearer <accessToken>
 ```
 
-### Using SSL when the database does not support it
+---
 
-If you see the below error, then you are trying to establish a SSL (secure) connection to a database that doesn't support it, most likely you set the value of the environment variable `DB_USE_SSL` to "true" when it should be "false".
+## Authentication
 
-```
-/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/pg/lib/connection.js:77
-          return self.emit('error', new Error('The server does not support SSL connections'))
-                                    ^
+Authentication is managed through `AuthContext`.
 
-Error: The server does not support SSL connections
-    at Socket.<anonymous> (/Users/hyf/dev/hyf/hyf-project-template/api/node_modules/pg/lib/connection.js:77:37)
-    at Object.onceWrapper (node:events:633:26)
-    at Socket.emit (node:events:518:28)
-    at addChunk (node:internal/streams/readable:559:12)
-    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
-    at Readable.push (node:internal/streams/readable:390:5)
-    at TCP.onStreamRead (node:internal/stream_base_commons:190:23)
+The app stores the logged-in user and token in state and persists the session in `localStorage`, so the user remains logged in after refreshing the page.
 
-Node.js v20.12.2
-[nodemon] app crashed - waiting for file changes before starting...
+This was a practical choice for a student project because it keeps the auth flow simple and easy to test. In a production application, token storage and security would need to be reviewed more carefully.
 
-Database not running or wrong address:
-API listening on port 3001
-node:internal/process/promises:289
-            triggerUncaughtException(err, true /* fromPromise */);
-            ^
+---
 
-AggregateError [ECONNREFUSED]:
-    at internalConnectMultiple (node:net:1116:18)
-    at afterConnectMultiple (node:net:1683:7) {
-  code: 'ECONNREFUSED',
-  fatal: true,
-  [errors]: [
-    Error: connect ECONNREFUSED ::1:3306
-        at createConnectionError (node:net:1646:14)
-        at afterConnectMultiple (node:net:1676:16) {
-      errno: -61,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '::1',
-      port: 3306
-    },
-    Error: connect ECONNREFUSED 127.0.0.1:3306
-        at createConnectionError (node:net:1646:14)
-        at afterConnectMultiple (node:net:1676:16) {
-      errno: -61,
-      code: 'ECONNREFUSED',
-      syscall: 'connect',
-      address: '127.0.0.1',
-      port: 3306
-    }
-  ]
-}
+## Main User Flow
+
+```text
+Events page
+   ↓
+Search / sort events
+   ↓
+Open event details
+   ↓
+Select ticket quantity
+   ↓
+Add to cart
+   ↓
+Review cart
+   ↓
+Checkout
+   ↓
+Place order
+   ↓
+View order in My Orders
 ```
 
-### Broken TypeScript config file
-This boilerplate does not use TypeScript, but Next which is used in the `app` package has built in support for TypeScript.
-This means that Next (or rather `esbuild` which is used internally) will look for a TypeScript config file (`tsconfig.json`) in the current folder and all parent folders until it finds one.
-If it does find a TypeScript config file but that file is invalid or empty you'll see errors like this:
+---
 
-```
-✘ [ERROR] Unexpected end of file in JSON
+## What I Focused On
 
-    ../../tsconfig.json:1:0:
-      1 │ 
-        ╵ ^
+The main focus of this project was to build a complete user journey instead of isolated UI screens.
 
-failed to load config from /Users/milton/dev/hyf/hyf-project-template/app/next.config.js
-error when starting dev server:
-Error: Build failed with 1 error:
-../../tsconfig.json:1:0: ERROR: Unexpected end of file in JSON
-    at failureErrorWithLog (/Users/milton/dev/hyf/hyf-project-template/app/node_modules/esbuild/lib/main.js:1651:15)
-    at /Users/milton/dev/hyf/hyf-project-template/app/node_modules/esbuild/lib/main.js:1059:25
-    at runOnEndCallbacks (/Users/milton/dev/hyf/hyf-project-template/app/node_modules/esbuild/lib/main.js:1486:45)
-    at buildResponseToResult (/Users/milton/dev/hyf/hyf-project-template/app/node_modules/esbuild/lib/main.js:1057:7)
-    at /Users/milton/dev/hyf/hyf-project-template/app/node_modules/esbuild/lib/main.js:1086:16
-    at responseCallbacks.<computed> (/Users/milton/dev/hyf/hyf-project-template/app/node_modules/esbuild/lib/main.js:704:9)
-    at handleIncomingPacket (/Users/milton/dev/hyf/hyf-project-template/app/node_modules/esbuild/lib/main.js:764:9)
-    at Socket.readFromStdout (/Users/milton/dev/hyf/hyf-project-template/app/node_modules/esbuild/lib/main.js:680:7)
-    at Socket.emit (node:events:519:28)
-    at addChunk (node:internal/streams/readable:559:12)
-```
+Important implementation points:
 
-There are 3 possible solutions:
-1. Delete the offending TypeScript config file
-2. Fix the issue in the file so that Next can use it
-3. Move your project folder to some place that doesn't put the TypeScript config file in the parent folder of your project folder
+- reusable layout and UI components;
+- routing between pages;
+- event filtering and sorting;
+- login/register flow;
+- protected order functionality;
+- cart state and cart quantity updates;
+- checkout form validation;
+- order creation and order details;
+- clear visual design matching the GoEvent brand style.
 
-## Architecture diagram
+---
 
-![Architecture](./images/architecture.png)
+## Challenges and Learnings
 
-## Applying consistent formatting
+One of the main challenges was connecting several parts of the app together: routes, API calls, authentication state, cart state, and protected order actions.
 
-Before you commit any changes you've made, you can run the command `npm run format` in either package to format the code using [Prettier](https://prettier.io/).
+The project helped me better understand:
 
-Using a consistent code style makes it easier to read code which improves productivity and avoid bugs.  
-When collaborating with other people, a code base should still look like it was written by a single person.
+- how to structure a React application;
+- how to manage global auth state with Context;
+- how to work with a mock API;
+- how to avoid hardcoded API URLs by using environment variables;
+- how to keep UI state and API data consistent;
+- how to design a complete user flow from browsing to checkout.
 
-## Checking for common code problems
+---
 
-Before you commit your changes, you can use `npm run check` in either package to check for code issues using [ESLint](https://eslint.org/).
+## Future Improvements
 
-ESLint is a "linter", a tool that scans your code for common code problems, this can help you avoid bugs and write better code.
+Possible next steps:
 
-## Deploying
+- replace the mock API with a production backend;
+- add real payment integration;
+- add admin functionality for creating and editing events;
+- add stronger backend validation;
+- improve ticket availability logic;
+- add loading skeletons and more detailed error states;
+- improve responsive layouts for smaller screens;
+- add automated tests for cart, checkout, and authentication flows.
 
-All 3 components (database, API, web app) can be deployed for free at [Render.com](https://render.com).
-Sign in using your Github account to make the process smoother.
-When you sign in you can specify which of your repositories you want Render.com to have access to.
+---
 
-[Database and API deployment instructions](./api/README.md#deploying)  
-[App deployment instructions](./app/README.md#deploying-a-static-web-app)
+## Author
+
+Created by **Iryna Lopatina**.
