@@ -16,8 +16,6 @@ The project was built as a frontend-focused React application with authenticatio
 
 ## Preview
 
-> The screenshots below are stored in `images/readme/`.  
-> If you add new screenshots, keep the same file names or update the paths in this README.
 
 ### Home page
 
