@@ -242,7 +242,7 @@ Authentication is managed through `AuthContext`.
 
 The app stores the logged-in user and token in state and persists the session in `localStorage`, so the user remains logged in after refreshing the page.
 
-This was a practical choice for a student project because it keeps the auth flow simple and easy to test. In a production application, token storage and security would need to be reviewed more carefully.
+This was a practical choice for the project because it keeps the auth flow simple and easy to test. 
 
 ---
 
