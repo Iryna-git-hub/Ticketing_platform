@@ -72,15 +72,46 @@
   border-color: var(--panel-card-hover-border);
 }
 
-.event-card:hover .event-title {
-  font-size: 1.3rem;
+
+.event-card:hover .category-badge {
+  font-size: 0.71rem;
+  padding: 5px 7px;
   transition: 0.2s ease;
 }
 
-.event-card:hover .category-badge {
-  font-size: 0.6rem;
-  padding: 5px 7px;
-  transition: 0.2s ease;
+.category-badge--conference {
+  color: #5d49b4;
+  background-color: #efebf6;
+}
+
+.category-badge--hackathon {
+  color: #4c6e61;
+  background-color: hsl(160, 19%, 94%);
+}
+
+.category-badge--workshop {  
+  background-color: var(--tertiary-color);
+  color: var(--primary-color);
+}
+
+.category-badge--meetup {
+  color: #3c69c3;
+  background-color: hsl(205, 52%, 92%);
+}
+
+.category-badge--bootcamp {
+  color: #f32a2a;
+  background-color: hsl(0, 89%, 96%);
+}
+
+.category-badge--seminar {
+  color: #c4a403;
+  background-color: hsl(55, 96%, 89%);
+}
+
+.category-badge--course {
+  color: #03bab4;
+  background-color: hsl(190, 62%, 93%);
 }
 
 .event-title {

@@ -107,12 +107,9 @@ export default function EventsPage() {
   }, [filterQuery, page, sortBy, totalPages]);
 
   return (
-    <section className="events-page">
-      <div className="content-width">
-        <h1>Find your next event</h1>
-      </div>
-
+    <section className="events-page"> 
       <div className="events-toolbar content-width panel-card">
+        <h1>Find your next event</h1>
         <div className="events-toolbar-controls">
           <label className="events-toolbar-field">
             <span>Search</span>

@@ -45,7 +45,11 @@ export default function EventCard({ event }) {
   return (
     <li className="event-card panel-card">
       <div className="event-card-top">
-        <span className="category-badge">{event.category}</span>
+        <span
+          className={`category-badge category-badge--${event.category.toLowerCase()}`}
+        >
+          {event.category}
+        </span>
       </div>
 
       <h2 className="event-title">{event.name}</h2>

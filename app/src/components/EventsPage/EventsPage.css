@@ -2,6 +2,7 @@
   padding-bottom: 32px;
 }
 
+
 .events-toolbar {
   display: grid;
   gap: 20px;
@@ -9,7 +10,7 @@
   padding: 16px 24px 24px;
 }
 
-.events-toolbar-copy h1 {
+h1 {
   color: var(--secondary-color);
   font-size: 1.8rem;
 }

@@ -323,8 +323,6 @@ footer {
   width: fit-content;
   padding: 7px 10px;
   border-radius: 20px;
-  background-color: var(--tertiary-color);
-  color: var(--primary-color);
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
