@@ -105,7 +105,11 @@ export default function EventDetail() {
   return (
     <section className="event-detail-page content-width">
       <article className="event-detail-card panel-card">
-        <span className="category-badge">{event.category}</span>
+        <span
+          className={`category-badge category-badge--${event.category.toLowerCase()}`}
+        >
+          {event.category}
+        </span>
 
         <h1>{event.name}</h1>
 

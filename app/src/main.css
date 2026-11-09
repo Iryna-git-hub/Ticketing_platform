@@ -53,7 +53,7 @@ h5 {
 
 h2 {
   font-size: 1.25rem;
-} 
+}
 
 .app-shell {
   min-height: 100vh;
@@ -326,6 +326,41 @@ footer {
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.category-badge--conference {
+  color: #5d49b4;
+  background-color: #efebf6;
+}
+
+.category-badge--hackathon {
+  color: #4c6e61;
+  background-color: hsl(160, 19%, 94%);
+}
+
+.category-badge--workshop {
+  background-color: var(--tertiary-color);
+  color: var(--primary-color);
+}
+
+.category-badge--meetup {
+  color: #3c69c3;
+  background-color: hsl(205, 52%, 92%);
+}
+
+.category-badge--bootcamp {
+  color: #f32a2a;
+  background-color: hsl(0, 89%, 96%);
+}
+
+.category-badge--seminar {
+  color: #c4a403;
+  background-color: hsl(55, 96%, 89%);
+}
+
+.category-badge--course {
+  color: #03bab4;
+  background-color: hsl(190, 62%, 93%);
 }
 
 .panel-card {
